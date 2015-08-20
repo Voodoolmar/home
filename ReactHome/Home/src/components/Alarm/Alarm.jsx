@@ -12,7 +12,17 @@ import React, { PropTypes } from 'react'; // eslint-disable-line no-unused-vars
 class Alarm {
   render() {
     return (
-      <div>Тут будет будильник</div>
+		<div className="panel panel-default">
+			<div className="panel-heading clearfix">
+				<h4 className="panel-title pull-left">Зал</h4>
+				<div className="btn-group pull-right">
+					<a href="#" className="btn btn-default"><i classNameName="glyphicon glyphicon-off"></i></a>
+				</div>
+			</div>
+			<div className="panel-body">
+				слайдеры диодов
+			</div>
+		</div>
     );
   }
 

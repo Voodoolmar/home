@@ -1,6 +1,6 @@
 {
-  "name": "Navbar",
+  "name": "Lights",
   "version": "0.0.0",
   "private": true,
-  "main": "./Navbar.jsx"
+  "main": "./Lights.jsx"
 }

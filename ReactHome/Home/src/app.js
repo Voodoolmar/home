@@ -38,25 +38,15 @@ function run() {
   // Render the top-level React component
   let props = {
     path: path,
-    onSetTitle: (title) => document.title = title,
+    setTitle: (title) => document.title = title,
     onSetMeta: setMetaTag,
     onPageNotFound: emptyFunction
   };
-
-
-  //let element = React.createElement(App, props);
-  //React.render(element, document.body);
+	
   Router.run(routes, Router.HistoryLocation, (Root, state) => {
 	props.path = state.path;
   	React.render(<Root {...props}/>, document.body);
   });
-  //Update `Application.path` prop when `window.location` is changed
-  //Dispatcher.register((payload) => {
-  //  if (payload.action.actionType === ActionTypes.CHANGE_LOCATION) {
-  //    element = React.cloneElement(element, {path: payload.action.path});
-  //    React.render(element, document.body);
-  //  }
-  //});
 }
 
 // Run the application when both DOM is ready

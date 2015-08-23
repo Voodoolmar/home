@@ -8,10 +8,19 @@
 
 import './Lights.less';
 import React, { PropTypes } from 'react'; // eslint-disable-line no-unused-vars
+import Slider from '../Slider';
 
-class Lights {
-  render() {
-  	return (
+class Lights extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {value:2};
+		this.onSliderChange = this.onSliderChange.bind(this);
+	}
+	onSliderChange(ev){
+		this.setState({value: +ev.currentTarget.value});
+	}
+	render() {
+  		return (
 		<div className="panel panel-default Lights">
 			<div className="panel-heading clearfix">
 				<h4 className="panel-title pull-left">Зал</h4>
@@ -20,7 +29,7 @@ class Lights {
 				</div>
 			</div>
 			<div className="panel-body">
-				слайдеры диодов
+				<Slider max={255} onSliderChange={this.onSliderChange} value={this.state.value} />
 			</div>
 		</div>
     );

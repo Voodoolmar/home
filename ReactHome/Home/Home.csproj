@@ -70,6 +70,7 @@
     <None Include="src\components\NotFoundPage\NotFoundPage.jsx" />
     <Content Include="src\components\NotFoundPage\NotFoundPage.less" />
     <Content Include="src\components\NotFoundPage\package.json" />
+    <None Include="src\components\Slider\Slider.jsx" />
     <Content Include="src\components\TextBox\package.json" />
     <Content Include="src\components\TextBox\TextBox.js" />
     <Content Include="src\components\TextBox\TextBox.less" />
@@ -88,6 +89,8 @@
     <Content Include="src\templates\index.html" />
     <Content Include="tools\**\*.*" />
     <Content Include="webpack.config.js" />
+    <Content Include="src\components\Slider\package.json" />
+    <Content Include="src\components\Slider\Slider.less" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".babelrc" />

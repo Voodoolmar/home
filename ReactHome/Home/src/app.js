@@ -45,7 +45,7 @@ function run() {
 	
   Router.run(routes, Router.HistoryLocation, (Root, state) => {
 	props.path = state.path;
-  	React.render(<Root {...props}/>, document.body);
+  	React.render(<Root {...props} />, document.body);
   });
 }
 

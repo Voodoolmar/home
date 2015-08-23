@@ -103,7 +103,12 @@ var appConfig = _.merge({}, config, {
     filename: 'app.js'
   },
   plugins: config.plugins.concat([
-      new webpack.DefinePlugin(_.merge(GLOBALS, {'__SERVER__': false}))
+      new webpack.DefinePlugin(_.merge(GLOBALS, { '__SERVER__': false })),
+	  new webpack.ProvidePlugin({
+  			$: "jquery",
+			jquery: "jQuery",
+			"windows.jQuery": "jquery"
+	  })
     ].concat(DEBUG ? [] : [
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),

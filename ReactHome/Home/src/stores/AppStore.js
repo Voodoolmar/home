@@ -73,24 +73,24 @@ var AppStore = assign({}, EventEmitter.prototype, {
 AppStore.dispatcherToken = Dispatcher.register((payload) => {
   var action = payload.action;
 
-  switch (action.actionType) {
+  //switch (action.actionType) {
 
-    case ActionTypes.LOAD_PAGE:
-      if (action.source === PayloadSources.VIEW_ACTION) {
-        loading = true;
-      } else {
-        loading = false;
-        if (!action.err) {
-          pages[action.path] = action.page;
-        }
-      }
-      AppStore.emitChange();
-      break;
+  //  case ActionTypes.LOAD_PAGE:
+  //    if (action.source === PayloadSources.VIEW_ACTION) {
+  //      loading = true;
+  //    } else {
+  //      loading = false;
+  //      if (!action.err) {
+  //        pages[action.path] = action.page;
+  //      }
+  //    }
+  //    AppStore.emitChange();
+  //    break;
 
-    default:
-      // Do nothing
+  //  default:
+  //    // Do nothing
 
-  }
+  //}
 
 });
 

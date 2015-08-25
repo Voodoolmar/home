@@ -1,11 +1,7 @@
 import './App.less';
 import React, { PropTypes } from 'react';
 import { RouteHandler, Link } from 'react-router';
-import invariant from 'react/lib/invariant';
-import AppActions from '../../actions/AppActions';
-import AppStore from '../../stores/AppStore';
 import Navbar from '../Navbar';
-import NotFoundPage from '../NotFoundPage';
 import setViewport from './setViewport';
 
 class App {

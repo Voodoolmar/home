@@ -16,7 +16,7 @@ import routes from './router';
 import Dispatcher from './core/Dispatcher';
 import AppStore from './stores/AppStore';
 
-var server = express();
+var server = process.server = express();
 
 server.set('port', (process.env.PORT || 5000));
 server.use(express.static(path.join(__dirname)));
@@ -24,6 +24,10 @@ server.use(express.static(path.join(__dirname)));
 //
 // Page API
 // -----------------------------------------------------------------------------
+server.get('/api/lightState/get', function(req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify({test: 2}));
+});
 server.get('/api/page/*', function(req, res) {
   var urlPath = req.path.substr(9);
   var page = AppStore.getPage(urlPath);
@@ -46,7 +50,7 @@ server.get('*', function(req, res) {
 		onSetMeta: function(name, content) { data[name] = content; },
 		onPageNotFound: function() { res.status(404); }
 	};
-	Router.run(routes, req.path, (Root) => {
+	Router.run(routes, req.path, (Root,state) => {
   		data.body = React.renderToString(<Root {...params}/>);
   		var html = template(data);
   		res.send(html);

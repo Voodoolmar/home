@@ -28,4 +28,9 @@ class Alarm {
 
 }
 
+Alarm.willTransitionTo = function (transition, params, query, callback) {
+	var a = query;
+	var b = params;
+	callback();
+};
 export default Alarm;

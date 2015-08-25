@@ -39,6 +39,7 @@
     <Content Include="LICENSE.txt" />
     <Content Include="preprocessor.js" />
     <Content Include="RemoteDebug.js" />
+    <Content Include="src\actions\LightActions.js" />
     <Content Include="src\actions\AppActions.js" />
     <Content Include="src\app.js" />
     <Content Include="src\assets\apple-touch-icon.png" />
@@ -77,8 +78,10 @@
     <Content Include="src\constants\ActionTypes.js" />
     <Content Include="src\constants\PayloadSources.js" />
     <Content Include="src\core\Dispatcher.js" />
+    <Content Include="src\core\http.js" />
     <Content Include="src\router.js" />
     <Content Include="src\server.js" />
+    <Content Include="src\stores\LightStore.js" />
     <Content Include="src\stores\AppStore.js" />
     <Content Include="src\styles\bootstrap.less" />
     <Content Include="src\styles\jumbotron.less" />

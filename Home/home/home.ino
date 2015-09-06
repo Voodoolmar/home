@@ -47,7 +47,7 @@ int offVal = 255;
 
 const char website[] PROGMEM = "server";
 
-byte Ethernet::buffer[700];
+byte Ethernet::buffer[200];
 
 static boolean stateChanged = false;
 
@@ -67,7 +67,8 @@ void setup()
   ether.printIp("IP:  ", ether.myip);
   ether.printIp("GW:  ", ether.gwip);
 
-  ether.parseIp(ether.hisip, "192.168.1.202");
+  ether.parseIp(ether.hisip, "192.168.1.104");
+  ether.parseIp(ether.hisport, 8080);
   ether.printIp("SRV: ", ether.hisip);
 
   initButtons();
@@ -176,7 +177,7 @@ void etherProcess(word pos){
   else
   {        
     if(stateChanged){
-      Serial.println("test");
+      Serial.println("send data");
       ether.browseUrl(PSTR("/foo/"), "bar", website, NULL);
     }
   }

@@ -79,6 +79,7 @@
     <Content Include="src\constants\PayloadSources.js" />
     <Content Include="src\core\Dispatcher.js" />
     <Content Include="src\core\http.js" />
+    <Content Include="src\core\io.js" />
     <Content Include="src\router.js" />
     <Content Include="src\server.js" />
     <Content Include="src\stores\LightStore.js" />

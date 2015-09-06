@@ -10,8 +10,7 @@ const getUrl = path => {
 				? `http://${process.env.WEBSITE_HOSTNAME}${path}` 
 				: `http://127.0.0.1:${process.server.get('port')}${path}`;
 }
-
-const http = {
+export default {
 
 	//get: path => new Promise((resolve, reject) => {
 	//	request
@@ -36,5 +35,3 @@ const http = {
 	}
 
 };
-
-export default http;

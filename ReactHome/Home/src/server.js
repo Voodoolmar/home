@@ -1,4 +1,4 @@
-/*
+﻿/*
  * React.js Starter Kit
  * Copyright (c) 2014 Konstantin Tarkus (@koistya), KriaSoft LLC.
  *
@@ -15,25 +15,38 @@ import Router from 'react-router';
 import routes from './router';
 import Dispatcher from './core/Dispatcher';
 import AppStore from './stores/AppStore';
+import io from './core/io';
 
 var server = process.server = express();
 
+
 server.set('port', (process.env.PORT || 5000));
 server.use(express.static(path.join(__dirname)));
-
 //
 // Page API
 // -----------------------------------------------------------------------------
-server.get('/api/lightState/get', function(req, res) {
-	res.setHeader('Content-Type', 'application/json');
-	res.send(JSON.stringify({test: 2}));
-});
-server.get('/api/page/*', function(req, res) {
-  var urlPath = req.path.substr(9);
-  var page = AppStore.getPage(urlPath);
-  res.send(page);
-});
+let lightState = {
+	rooms:[
+		{
+			id: 1,
+			name: 'Зал',
+			main: false,
+			right: 0,
+			left: 0
+		},
+		{
+			id: 2,
+			name: 'Кухня',
+			main: false,
+			additional: false
+		}
+	]
+};
 
+process.server.get('/api/lightState/get', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(lightState));
+});
 //
 // Server-side rendering
 // -----------------------------------------------------------------------------

@@ -16,7 +16,8 @@ import emptyFunction from 'react/lib/emptyFunction';
 import App from './components/App';
 import Dispatcher from './core/Dispatcher';
 import AppActions from './actions/AppActions';
-import ActionTypes from './constants/ActionTypes';
+import LightActions from './actions/LightActions';
+import ioClient from 'socket.io-client';
 
 let path = decodeURI(window.location.pathname);
 let setMetaTag = (name, content) => {
@@ -42,7 +43,8 @@ function run() {
     onSetMeta: setMetaTag,
     onPageNotFound: emptyFunction
   };
-	
+  var socket = ioClient('http://localhost:3005');
+	socket.on('updateLightState', () => LightActions.loadState());
   Router.run(routes, Router.HistoryLocation, (Root, state) => {
 	props.path = state.path;
   	React.render(<Root {...props} />, document.body);

@@ -24,7 +24,7 @@ LightStore.dispatcherToken = Dispatcher.register((payload) => {
 	
 	if (action === 'Ligth.StateLoaded') {
 		loading = false;
-		LightStore._state = payload.data || {test: 1};
+		LightStore._state = payload.data;
 		LightStore.emit('change');
 	}
 });

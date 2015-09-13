@@ -62,13 +62,10 @@ void setup()
   if (ether.begin(sizeof Ethernet::buffer, mymac, 10) == 0) 
     Serial.println( "Failed to access Ethernet controller");
   ether.staticSetup(myip, gwip);
-  //ether.staticSetup(myip, gwip, dns);
-  //ether.copyIp(ether.hisip, hisip);
   ether.printIp("IP:  ", ether.myip);
   ether.printIp("GW:  ", ether.gwip);
 
   ether.parseIp(ether.hisip, "192.168.1.104");
-  ether.parseIp(ether.hisport, 8080);
   ether.printIp("SRV: ", ether.hisip);
 
   initButtons();
@@ -178,7 +175,7 @@ void etherProcess(word pos){
   {        
     if(stateChanged){
       Serial.println("send data");
-      ether.browseUrl(PSTR("/foo/"), "bar", website, NULL);
+      //ether.browseUrl(PSTR("/foo/"), "bar", website, NULL);
     }
   }
 }

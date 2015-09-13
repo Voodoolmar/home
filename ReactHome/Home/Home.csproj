@@ -58,6 +58,9 @@
     <Content Include="src\components\Alarm\package.json" />
     <Content Include="src\components\Alarm\Alarm.jsx" />
     <Content Include="src\components\Alarm\Alarm.less" />
+    <Content Include="src\components\Room\Room.jsx" />
+    <Content Include="src\components\Room\Room.less" />
+    <Content Include="src\components\Room\package.json" />
     <None Include="src\components\Settings\Settings.jsx" />
     <Content Include="src\components\Settings\Settings.less" />
     <Content Include="src\components\Settings\package.json" />
@@ -71,6 +74,9 @@
     <None Include="src\components\NotFoundPage\NotFoundPage.jsx" />
     <Content Include="src\components\NotFoundPage\NotFoundPage.less" />
     <Content Include="src\components\NotFoundPage\package.json" />
+    <Content Include="src\components\Switch\package.json" />
+    <Content Include="src\components\Switch\Switch.jsx" />
+    <Content Include="src\components\Switch\Switch.less" />
     <None Include="src\components\Slider\Slider.jsx" />
     <Content Include="src\components\TextBox\package.json" />
     <Content Include="src\components\TextBox\TextBox.js" />

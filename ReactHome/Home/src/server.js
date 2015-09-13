@@ -30,15 +30,14 @@ let lightState = {
 		{
 			id: 1,
 			name: 'Зал',
-			main: false,
-			right: 0,
-			left: 0
+			lights:[{id: 1, name: 'Люстра', state: false}],
+			ledLines: [{id:101, name: 'Правый', state: 255},{id:102, name: 'Левый', state: 255}]
 		},
 		{
 			id: 2,
 			name: 'Кухня',
-			main: false,
-			additional: false
+			lights:[{id: 2, name: 'Люстра', state: false}, {id: 3, name: 'Потолок', state: false}],
+			ledLines:[]
 		}
 	]
 };

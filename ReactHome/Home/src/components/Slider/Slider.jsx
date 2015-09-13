@@ -4,15 +4,16 @@ import React, { PropTypes } from 'react';
 class Slider extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {value: this.props.value};
 	}
 	render() {
 		return (
 			<input type="range"
 				min={this.props.min}
 				max={this.props.max}
-				onChange={this.props.onSliderChange}
+				onChange={this.props.onChange}
 				step={1}
-				value={this.props.value} />
+				value={this.state.value} />
 		);
 	}
 
@@ -21,7 +22,7 @@ class Slider extends React.Component {
 Slider.propTypes = {
 	min: PropTypes.number,
 	max: PropTypes.number,
-	onSliderChange: PropTypes.func,
+	onChange: PropTypes.func,
 	value: PropTypes.number
 };
 Slider.defaultProps = {

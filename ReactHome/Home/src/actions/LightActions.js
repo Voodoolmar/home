@@ -2,6 +2,15 @@ import Dispatcher from '../core/Dispatcher';
 import http from '../core/http';
 
 export default {
+	updateSwitchState(roomId, lightId, state) {
+		Dispatcher.dispatch({
+			actionType: "Ligth.UpdateSwitchState",
+			roomId: roomId,
+			lightId: lightId,
+			state:state
+		});
+	},
+
 	loadState(cb) {
 		Dispatcher.dispatch({
 			eventName: 'Ligth.StateLoading'

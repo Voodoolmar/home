@@ -16,6 +16,7 @@ import routes from './router';
 import Dispatcher from './core/Dispatcher';
 import AppStore from './stores/AppStore';
 import io from './core/io';
+import http from 'superagent';
 
 var server = process.server = express();
 
@@ -31,7 +32,7 @@ let lightState = {
 			id: 1,
 			name: 'Зал',
 			lights:[{id: 1, name: 'Люстра', state: false}],
-			ledLines: [{id:101, name: 'Правый', state: 255},{id:102, name: 'Левый', state: 255}]
+			ledLines: [{id:101, name: 'Правый', state: 0},{id:102, name: 'Левый', state: 0}]
 		},
 		{
 			id: 2,
@@ -43,6 +44,39 @@ let lightState = {
 };
 
 process.server.get('/api/lightState/get', function (req, res) {
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(lightState));
+});
+
+process.server.get('/api/lightState/set', function (req, res) {
+	const roomId = +req.query.roomId;
+	const lightId = +req.query.lightId;
+	const sliderId = +req.query.sliderId;
+	const state = +req.query.state || req.query.state === 'true';
+	for (let i = 0; i < lightState.rooms.length; i++) {
+		const room = lightState.rooms[i];
+		if (room.id !== roomId) continue;
+		if (lightId) {
+			for (let j = 0; j < room.lights.length; j++) {
+				const light = room.lights[j];
+				if(light.id !== lightId) continue;
+				light.state = state;
+				http.get(`http://192.168.1.200/${lightId}/${+state}`).end((err,res) => {});
+				break;
+			}
+		}
+		if (sliderId) {
+			for (let j = 0; j < room.ledLines.length; j++) {
+				const ledLine = room.ledLines[j];
+				if(ledLine.id !== sliderId) continue;
+				ledLine.state = +state;
+				http.get(`http://192.168.1.200/${lightId}/${255-state}`).end((err,res) => {});
+				break;
+			}
+		}
+	}
+
+
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(lightState));
 });

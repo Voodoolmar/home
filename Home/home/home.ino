@@ -37,23 +37,15 @@ static byte gwip[] = {
   192,168,1,1 };
 static byte dns[] = { 
   192,168,1,1 };
-static byte hisip[] = { 
-  192,168,1,101 }; // remote webserver
 
 static byte mymac[] = { 
   0x74,0x69,0x69,0x2D,0x30,0x31 };
 
 int offVal = 255;
 
-const char website[] PROGMEM = "server";
-
 byte Ethernet::buffer[200];
 
-static boolean stateChanged = false;
-
 static BufferFiller bfill;  // used as cursor while filling the buffer
-
-//Stash stash;
 
 void setup()
 {
@@ -65,9 +57,6 @@ void setup()
   ether.printIp("IP:  ", ether.myip);
   ether.printIp("GW:  ", ether.gwip);
 
-  ether.parseIp(ether.hisip, "192.168.1.104");
-  ether.printIp("SRV: ", ether.hisip);
-
   initButtons();
 
   Serial.println("Started");
@@ -75,7 +64,7 @@ void setup()
 void loop()
 {
   word pos = ether.packetLoop(ether.packetReceive());
-  stateChanged = false;
+  
   byte value1 = INP_1.read8();
   byte value2 = INP_2.read8();
 
@@ -83,6 +72,7 @@ void loop()
   updateState(state2, value2, 2);
 
   etherProcess(pos);
+    Serial.println("test");
 
   updateBpState();
 
@@ -122,7 +112,6 @@ void updateState(uint8_t &state, byte newState, byte num)
     if (buttons[i+shift]->clicks == 1) 
     {
       state ^= (1 << i);
-      stateChanged = true;
     }
     if (buttons[i+shift]->clicks == -1) 
     {
@@ -170,13 +159,6 @@ void etherProcess(word pos){
     processParams((char *) Ethernet::buffer + pos);
     statePage(bfill);
     ether.httpServerReply(bfill.position());
-  }
-  else
-  {        
-    if(stateChanged){
-      Serial.println("send data");
-      //ether.browseUrl(PSTR("/foo/"), "bar", website, NULL);
-    }
   }
 }
 

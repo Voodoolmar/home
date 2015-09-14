@@ -9,16 +9,17 @@ class Switch extends React.Component {
 	}
 
 	onClick(){
-		this.setState({value: !this.state.value});
-		this.props.onChange(this.props.key, this.state.value);
+		let value = !this.state.value;
+		this.setState({value: value});
+		this.props.onChange(this.props.id, value);
 	}
 
 	render() {
 		let classNames = 'btn btn-sm';
 		if(this.state.value){
-			classNames += ' btn-default';
-		}else{
 			classNames += ' btn-primary';
+		}else{
+			classNames += ' btn-default';
 		}
 		return (
 			<a className={classNames} onClick={this.onClick}>

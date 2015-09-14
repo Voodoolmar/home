@@ -13,6 +13,7 @@ class Room extends React.Component {
 	}
 		
 	onSliderChange(sliderId, value){
+		LightActions.updateSliderState(this.props.room.id, sliderId, value)
 	}
 
 	onSwitchClick(lightId, value){
@@ -27,7 +28,7 @@ class Room extends React.Component {
 					<div className="btn-group pull-right">
 						{
 							this.state.lights.map((light)=>{
-								return (<Switch key={light.id} title={light.name} value={light.state} onChange={this.onSwitchClick} />)
+								return (<Switch key={light.id} id={light.id} title={light.name} value={light.state} onChange={this.onSwitchClick} />)
 							})
 						}
 					</div>
@@ -35,7 +36,7 @@ class Room extends React.Component {
 				<div className="panel-body">
 					{
 						this.state.ledLines.map((ledLine)=>{
-							return (<Slider key={ledLine.id} max={255} onChange={this.onSliderChange} value={ledLine.state} />)
+							return (<Slider key={ledLine.id} id={ledLine.id} max={255} onChange={this.onSliderChange} value={ledLine.state} />)
 						})
 					}
 				</div>

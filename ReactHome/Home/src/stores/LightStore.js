@@ -17,7 +17,7 @@ var LightStore = assign({}, EventEmitter.prototype, {
 });
 
 LightStore.dispatcherToken = Dispatcher.register((data) => {
-	var action = data.eventName;
+	var action = data.actionType;
 	if (action === 'Ligth.StateLoading') {
 		loading = true;
 	}
@@ -35,7 +35,20 @@ LightStore.dispatcherToken = Dispatcher.register((data) => {
 			for (let j = 0; j < room.lights.length; j++) {
 				let light = room.lights[j];
 				if(light.id !== data.lightId) continue;
-				light.state = state;
+				light.state = data.state;
+			}
+		}
+		LightStore.emit('change');
+	}
+	
+	if (action === 'Ligth.UpdateSliderState') {
+		for (let i = 0; i < LightStore._state.rooms.length; i++) {
+			let room = LightStore._state.rooms[i];
+			if(room.id !== data.roomId) continue;
+			for (let j = 0; j < room.ledLines.length; j++) {
+				let ledLine = room.ledLines[j];
+				if(ledLine.id !== data.sliderId) continue;
+				ledLine.state = data.state;
 			}
 		}
 		LightStore.emit('change');

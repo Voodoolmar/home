@@ -31,15 +31,34 @@ let lightState = {
 		{
 			id: 1,
 			name: 'Зал',
-			lights:[{id: 1, name: 'Люстра', state: false}],
+			lights:[{id: 10, name: 'Люстра', state: false}],
 			ledLines: [{id:101, name: 'Правый', state: 0},{id:102, name: 'Левый', state: 0}]
 		},
 		{
 			id: 2,
 			name: 'Кухня',
-			lights:[{id: 2, name: 'Люстра', state: false}, {id: 3, name: 'Потолок', state: false}],
+			lights:[{id: 13, name: 'Люстра', state: false},{id: 14, name: 'Потолок', state: false}],
+			ledLines:[]
+		},
+		{
+			id: 3,
+			name: 'Спальня',
+			lights:[{id: 11, name: 'Люстра', state: false},{id: 12, name: 'Гардероб', state: false}],
+			ledLines: [{id:103, name: 'Правый', state: 0},{id:104, name: 'Левый', state: 0}]
+		},
+		{
+			id: 4,
+			name: 'Туалет',
+			lights:[{id: 4, name: 'Люстра', state: false},{id: 16, name: 'Гардероб', state: false}],
+			ledLines: []
+		},
+		{
+			id: 5,
+			name: 'Коридор',
+			lights:[{id: 15, name: 'Потолок', state: false}],
 			ledLines:[]
 		}
+
 	]
 };
 
@@ -61,7 +80,10 @@ process.server.get('/api/lightState/set', function (req, res) {
 				const light = room.lights[j];
 				if(light.id !== lightId) continue;
 				light.state = state;
-				http.get(`http://192.168.1.200/${lightId}/${+state}`).end((err,res) => {});
+				http
+					.get(`http://192.168.1.200/${lightId}/${+state}`)
+					.accept('application/json')
+					.end(updateServerState);
 				break;
 			}
 		}
@@ -70,16 +92,24 @@ process.server.get('/api/lightState/set', function (req, res) {
 				const ledLine = room.ledLines[j];
 				if(ledLine.id !== sliderId) continue;
 				ledLine.state = +state;
-				http.get(`http://192.168.1.200/${lightId}/${255-state}`).end((err,res) => {});
+				http
+					.get(`http://192.168.1.200/${sliderId}/${255-state}`)
+					.accept('application/json')
+					.end(updateServerState);
 				break;
 			}
 		}
 	}
 
-
 	res.setHeader('Content-Type', 'application/json');
 	res.send(JSON.stringify(lightState));
+	io.emit('stateChanged');
 });
+
+function updateServerState(err,res) {
+	
+	//var arduinoState = eval(res.body); 
+}
 //
 // Server-side rendering
 // -----------------------------------------------------------------------------

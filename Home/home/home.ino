@@ -43,7 +43,7 @@ static byte mymac[] = {
 
 int offVal = 255;
 
-byte Ethernet::buffer[200];
+byte Ethernet::buffer[500];
 
 static BufferFiller bfill;  // used as cursor while filling the buffer
 
@@ -72,7 +72,6 @@ void loop()
   updateState(state2, value2, 2);
 
   etherProcess(pos);
-    Serial.println("test");
 
   updateBpState();
 
@@ -168,7 +167,7 @@ void processParams(char* data){
     char* param;
     strtok(data, " ");
     param = strtok(NULL, " ");
-
+    if(strlen(param)<2 || strlen(param)>8) return;
     byte val = atoi(strtok(param, "/")); 
     int state = atoi(strtok(NULL, "/"));
 

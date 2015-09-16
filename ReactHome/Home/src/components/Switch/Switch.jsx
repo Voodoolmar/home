@@ -5,10 +5,10 @@ class Switch extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {value: this.props.value};
-		this.onClick = this.onClick.bind(this);
+		this._onClick = this._onClick.bind(this);
 	}
 
-	onClick(){
+	_onClick(){
 		let value = !this.state.value;
 		this.setState({value: value});
 		this.props.onChange(this.props.id, value);
@@ -22,7 +22,7 @@ class Switch extends React.Component {
 			classNames += ' btn-default';
 		}
 		return (
-			<a className={classNames} onClick={this.onClick}>
+			<a className={classNames} onClick={this._onClick}>
 				<i className="glyphicon glyphicon-off"></i>
 			</a>
 		);

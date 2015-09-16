@@ -36,7 +36,9 @@ function run() {
     onPageNotFound: emptyFunction
   };
   var socket = ioClient('http://localhost:3005');
-	socket.on('updateLightState', () => LightActions.loadState());
+  socket.on('stateChanged', () => {
+	  LightActions.loadState();
+  });
   Router.run(routes, Router.HistoryLocation, (Root, state) => {
 	props.path = state.path;
   	React.render(<Root {...props} />, document.body);

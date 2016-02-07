@@ -24,11 +24,11 @@ class Room extends React.Component {
   		return (
 			<div className="panel panel-default Room">
 				<div className="panel-heading clearfix">
-					<h4 className="panel-title pull-left">{this.state.name}</h4>
+					<h4 className="panel-title pull-left">{this.props.room.name}</h4>
 					<div className="btn-group pull-right">
 						{
 							this.state.lights.map((light)=>{
-								return (<Switch key={light.id} id={light.id} title={light.name} value={light.state} onChange={this.onSwitchClick} />)
+								return (<Switch key={light.id} id={light.id} title={light.name} onChange={this.onSwitchClick} value={light.state} />)
 							})
 						}
 					</div>

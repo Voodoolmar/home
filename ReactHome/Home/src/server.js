@@ -83,7 +83,7 @@ process.server.get('/api/lightState/set', function (req, res) {
 				http
 					.get(`http://192.168.1.200/${lightId}/${+state}`)
 					.accept('application/json')
-					.end(updateServerState);
+					.end((err,data)=>updateServerState(err,data, res));
 				break;
 			}
 		}
@@ -95,20 +95,29 @@ process.server.get('/api/lightState/set', function (req, res) {
 				http
 					.get(`http://192.168.1.200/${sliderId}/${255-state}`)
 					.accept('application/json')
-					.end(updateServerState);
+					.end((err,data)=>updateServerState(err,data, res));
 				break;
 			}
 		}
 	}
-
-	res.setHeader('Content-Type', 'application/json');
-	res.send(JSON.stringify(lightState));
-	io.emit('stateChanged');
 });
 
-function updateServerState(err,res) {
-	
-	//var arduinoState = eval(res.body); 
+function updateServerState(err,data, res) {
+	const arduinoState = JSON.parse(data.text);
+	for (let i = 0; i < lightState.rooms.length; i++) {
+		const room = lightState.rooms[i];
+		for (let j = 0; j < room.lights.length; j++) {
+			const light = room.lights[j];
+			light.state = arduinoState[`s${light.id}`];
+		}
+		for (let j = 0; j < room.ledLines.length; j++) {
+			const ledLine = room.ledLines[j];
+			ledLine.state = arduinoState[`a${ledLine.id}`];
+		}
+	}
+	io.emit('stateChanged');
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(lightState));
 }
 //
 // Server-side rendering

@@ -1,13 +1,15 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
+import ISwitchProps from './ISwitchProps';
+import ISwitchState from './ISwitchState';
 
-class Switch extends React.Component {
+class Switch extends React.Component<ISwitchProps, ISwitchState> {
 	constructor(props) {
 		super(props);
 		this.state = {value: this.props.value};
-		this._onClick = this._onClick.bind(this);
+		this.onClick = this.onClick.bind(this);
 	}
 
-	_onClick(){
+	private onClick(){
 		let value = !this.state.value;
 		this.props.onChange(this.props.id, value);
 	}
@@ -19,27 +21,18 @@ class Switch extends React.Component {
 		}
 	}
 	render() {
-		let classNames = 'btn btn-sm';
+		let classNames = 'btn btn-sm Switch';
 		if(this.state.value){
 			classNames += ' btn-primary';
 		}else{
 			classNames += ' btn-default';
 		}
 		return (
-			<a className={classNames} onClick={this._onClick}>
+			<a className={classNames} onClick={this.onClick}>
 				<i className="glyphicon glyphicon-off"></i>
 			</a>
 		);
 	}
 
 }
-
-Switch.propTypes = {
-	onChange: PropTypes.func,
-	value: PropTypes.bool
-};
-Switch.defaultProps = {
-	value: false
-};
-
-export default Switch;
+export default Switch

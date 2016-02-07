@@ -17,7 +17,11 @@ class Slider extends React.Component {
 			}
 		}
 	}
-
+	//componentWillReceiveProps(nextProps) {
+	//	this.setState({
+	//		value: nextProps.value
+	//	});
+	//}
 	render() {
 		return (
 			<input type="range"

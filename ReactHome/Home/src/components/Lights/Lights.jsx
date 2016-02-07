@@ -12,7 +12,7 @@ class Lights extends React.Component {
 		this.lightsChanged = this.lightsChanged.bind(this);
 	}
 	lightsChanged(){
-		this.state = LightStore.getState();
+		this.setState(LightStore.getState());
 	}
 	componentDidMount() { 
 		LightStore.on('change', this.lightsChanged);

@@ -195,7 +195,12 @@ void statePage(BufferFiller& buf) {
   byte m = (t / 60) % 60;
   byte s = t % 60;
 
-  buf.emit_p(PSTR("{"
+  buf.emit_p(PSTR(
+    "HTTP/1.0 200 OK\r\n"
+    "Content-Type: text/html\r\n"
+    "Pragma: no-cache\r\n"
+    "\r\n"
+    "{"
     "\"uptime\":\"$D$D:$D$D:$D$D\","), h/10, h%10, m/10, m%10, s/10, s%10);
 
   for(int i = 0;i<(bitCount*chipCount);++i){

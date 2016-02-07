@@ -114,7 +114,25 @@ void updateState(uint8_t &state, byte newState, byte num)
     }
     if (buttons[i+shift]->clicks == 2) 
     {
-      buttons[i+shift]->EditMode();
+      int a = i+shift+1;
+      if(a == 11 || a == 12){
+        if(a3<offVal || a4 < offVal){
+          a3 = offVal;
+          a4 = offVal;
+        }else{
+          a3 = 254;
+          a4 = 254;
+        }
+      }
+      if(a == 9 || a == 10){
+        if(a1<offVal || a2 < offVal){
+          a1 = offVal;
+          a2 = offVal;
+        }else{
+          a1 = 254;
+          a2 = 254;
+        }
+      }
     }
     if (buttons[i+shift]->clicks == -1) 
     {

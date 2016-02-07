@@ -12,9 +12,19 @@ Stater::Stater()
 	debounceTime = 20;            // Debounce timer in ms
 	multiclickTime = 250;           // Time limit for multi clicks
 	longClickTime = 1000;
+	
+	_editMode = LOW;
+	_lastClickTime = 0;
+	editModeOffTime = 3000;
 }
 
 
+void Stater::EditMode()
+{	
+	_editMode = HIGH;
+	multiclickTime = 50;
+	_lastClickTime = (long)millis();
+}
 
 void Stater::Update(boolean btnState)
 {
@@ -49,6 +59,12 @@ void Stater::Update(boolean btnState)
 		// negative count for long clicks
 		clicks = 0 - _clickCount;
 		_clickCount = 0;
+	}
+	
+	//Off EditModel
+	if(_editMode && (now - _lastClickTime > editModeOffTime)){
+		_editMode = LOW;
+		multiclickTime = 250;
 	}
 
 	_lastState = _btnState;

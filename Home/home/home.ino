@@ -112,6 +112,10 @@ void updateState(uint8_t &state, byte newState, byte num)
     {
       state ^= (1 << i);
     }
+    if (buttons[i+shift]->clicks == 2) 
+    {
+      buttons[i+shift]->EditMode();
+    }
     if (buttons[i+shift]->clicks == -1) 
     {
       allOff();

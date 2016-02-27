@@ -1,0 +1,71 @@
+Error: D:\Projects\RO\RO\views\layout.jade:32
+    30|       footer.text-center
+    31|         <div class="footer-above">
+  > 32|             <div class="container">
+    33|                 <div class="row">
+    34|                     <div class="footer-col col-md-4">
+    35|                         <h3>Location</h3>
+
+unexpected token "indent"
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:254:15)
+    at Parser.block (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:211:21)
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:252:21)
+Error: D:\Projects\RO\RO\views\layout.jade:59
+    57|                         h3 О нас
+    58|                         p Freelance is a free to use, open source Bootstrap theme created by
+  > 59|                             a(href="http://startbootstrap.com) Start Bootstrap                  
+    60|         .footer-below
+    61|             .container
+    62|                 .row
+
+The end of the string was reached with no closing bracket found.
+    at Function.parseMax (D:\Projects\RO\RO\node_modules\jade\node_modules\character-parser\index.js:26:13)
+    at Object.Lexer.bracketExpression (D:\Projects\RO\RO\node_modules\jade\lib\lexer.js:129:33)
+    at Object.Lexer.attrs (D:\Projects\RO\RO\node_modules\jade\lib\lexer.js:610:24)
+    at Object.Lexer.next (D:\Projects\RO\RO\node_modules\jade\lib\lexer.js:939:15)
+    at Object.Lexer.lookahead (D:\Projects\RO\RO\node_modules\jade\lib\lexer.js:113:46)
+    at Parser.lookahead (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:102:23)
+    at Parser.peek (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:79:17)
+    at Parser.tag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:773:22)
+    at Parser.parseTag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:211:21)
+Error: D:\Projects\RO\RO\views\layout.jade:37
+
+
+br is self closing and should not have content.
+    at Object.Compiler.visitTag (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:471:32)
+    at Object.Compiler.visitNode (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:225:37)
+    at Object.Compiler.visit (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:212:10)
+    at Object.Compiler.visitBlock (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:295:12)
+    at Object.Compiler.visitNode (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:225:37)
+    at Object.Compiler.visit (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:212:10)
+    at Object.Compiler.visitTag (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:480:12)
+    at Object.Compiler.visitNode (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:225:37)
+    at Object.Compiler.visit (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:212:10)
+    at Object.Compiler.visitBlock (D:\Projects\RO\RO\node_modules\jade\lib\compiler.js:295:12)
+Error: D:\Projects\RO\RO\views\layout.jade:18
+    16|     
+    17|     <!--[if lt IE 9]>
+  > 18|         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    19|         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    20|     <![endif]-->
+    21|   body
+
+unexpected token "indent"
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:254:15)
+    at Parser.block (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:211:21)
+    at Parser.block (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:729:25)
+    at Parser.tag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:838:24)
+    at Parser.parseTag (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:759:17)
+    at Parser.parseExpr (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:211:21)
+    at Parser.parse (D:\Projects\RO\RO\node_modules\jade\lib\parser.js:122:25)

@@ -5,13 +5,14 @@ html
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name="description" content="Ремонт и отделка")
-    title #{title} - Ремонт и отделка
+    title Ремонт и отделка
     link(rel='stylesheet', type='text/css', href='/css/bootstrap.min.css')
     link(rel='stylesheet', type='text/css', href='/css/freelancer.css')
+    link(rel="shortcut icon", href="/favicon.ico")
 
     link(rel='stylesheet', type='text/css', href='/font-awesome/css/font-awesome.min.css')
-    link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Montserrat:400,700')
-    link(rel='stylesheet', type='text/css', href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic')
+    link(rel='stylesheet', type='text/css', href='https://fonts.googleapis.com/css?family=Russo+One&subset=latin,cyrillic')
+    link(rel='stylesheet', type='text/css', href='https://fonts.googleapis.com/css?family=Neucha&subset=latin,cyrillic')
   body#page-top.index
     nav.navbar.navbar-default.navbar-fixed-top
       .container
@@ -20,13 +21,15 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='#page-top') Ремонт и отделка
+          a.navbar-brand(href='#page-top')
+            img.hidden-xs(src="img/logo-sm.png", alt="", style='margin-top: -30px;')
+            img.visible-xs(src="img/logo-xs.png", alt="") 
         .navbar-collapse.collapse
           ul.nav.navbar-nav.navbar-right
             li.hidden
               a(href='#page-top') 
             li.page-scroll
-              a(href='#portfolio') Начало
+              a(href='#portfolio') Портфолио
             li.page-scroll
               a(href='#about') О нас
             li.page-scroll
@@ -37,9 +40,9 @@ html
                 .col-lg-12
                     img.img-responsive(src="img/profile.png", alt="")
                     .intro-text
-                        span.name Start Bootstrap
+                        span.name Ремонт и отделка
                         hr.star-light
-                        span.skills Web Developer - Graphic Artist - User Experience Designer
+                        span.skills Гарантия качества
     block content
     footer.text-center
         .footer-above

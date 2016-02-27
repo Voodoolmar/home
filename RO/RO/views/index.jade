@@ -6,7 +6,7 @@ block content
         .container
             .row
                 .col-lg-12.text-center
-                    h2 Portfolio
+                    h2 Портфолио
                     hr.star-primary
             .row
                 .col-sm-4.portfolio-item
@@ -20,51 +20,53 @@ block content
         .container
             .row
                 .col-lg-12.text-center
-                    h2 About
+                    h2 О нас
                     hr.star-light
             .row
                 .col-lg-4.col-lg-offset-2
-                    p Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional LESS stylesheets for easy customization.
+                    p 
+                        |Ремонт, как известно, затея довольно хлопотная. 
+                        |Не всегда, есть силы, желания и, что самое главное, умения, чтобы сделать его самостоятельно. 
+                        |В этом случае наша команда готова прийти вам на помощь.
+                        |Мы производим широкий спектр работ, в каждом случае стремясь достичь идеального результата, который превзойдет  все ваши ожидания. 
+                        
                 .col-lg-4
-                    p Whether you're a student looking to showcase your work, a professional looking to attract clients, or a graphic artist looking to share your projects, this template is the perfect starting point!
-                .col-lg-8.col-lg-offset-2.text-center
-                    a(href="#").btn.btn-lg.btn-outline
-                        i.fa.fa-download Download Theme
+                    p 
+                        |Мы не передаем заказы другим бригадам. 
+                        |Каждый наш клиент имеет дело с нами лично. 
+                        |Мы повышаем свой профессиональный уровень постоянно. 
+                        |Наша команда дорожит  своей репутацией. 
+                        |Нам выгоднее выполнить свою работу качественно и получить еще одного довольного клиента, чем схалтурить и получить негативные отзывы.
 
     section#contact
         .container
             .row
                 .col-lg-12.text-center
-                    h2 Contact Me
+                    h2 Свяжитесь с нами
                     hr.star-primary
             .row
                 .col-lg-8.col-lg-offset-2
                     form#contactForm(name="sentMessage", novalidate)
                         .row.control-group
                             .form-group.col-xs-12.floating-label-form-group.controls
-                                label Name
-                                input.form-control#name(type="text", placeholder="Name", required, data-validation-required-message="Please enter your name.")
+                                label Как к вам обращаться
+                                input.form-control#name(type="text", placeholder="Имя", required, data-validation-required-message="Введите Ваше имя.")
                                 p.help-block.text-danger
                         .row.control-group
                             .form-group.col-xs-12.floating-label-form-group.controls
-                                label Email Address
-                                input.form-control#email(type="email", placeholder="Email Address", required, data-validation-required-message="Please enter your email address.")
+                                label Телефон для связи
+                                input.form-control#phone(type="tel", placeholder="Телефон для связи", required, data-validation-required-message="Введите номер для связи с Вами.")
                                 p.help-block.text-danger
                         .row.control-group
                             .form-group.col-xs-12.floating-label-form-group.controls
-                                label Phone Number
-                                input.form-control#phone(type="tel", placeholder="Phone Number", required, data-validation-required-message="Please enter your phone number.")
-                                p.help-block.text-danger
-                        .row.control-group
-                            .form-group.col-xs-12.floating-label-form-group.controls
-                                label Message
-                                textarea.form-control#message(rows="5", placeholder="Message", required, data-validation-required-message="Please enter a message.")
+                                label Опишите проект
+                                textarea.form-control#message(rows="5", placeholder="Опишите проект")
                                 p.help-block.text-danger
                         br
                         #success
                         .row
                             .form-group.col-xs-12
-                                button(type="submit").btn.btn-success.btn-lg Send
+                                button(type="submit").btn.btn-success.btn-lg Отправить
 
 
 block modals

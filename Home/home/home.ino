@@ -220,6 +220,7 @@ void statePage(BufferFiller& buf) {
   buf.emit_p(PSTR(
     "HTTP/1.0 200 OK\r\n"
     "Content-Type: text/html\r\n"
+    "Access-Control-Allow-Origin: *\r\n"
     "Pragma: no-cache\r\n"
     "\r\n"
     "{"

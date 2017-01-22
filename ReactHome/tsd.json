@@ -1,0 +1,87 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "jquery/jquery.d.ts": {
+      "commit": "398bd742115e2b071ab3edf8b543b6df6fa62dc2"
+    },
+    "react-redux/react-redux.d.ts": {
+      "commit": "0d622d857f97d44ea7dcad2b3edec1f23c48fe9e"
+    },
+    "redux/redux.d.ts": {
+      "commit": "08ed4e9f1869e37e29514d862e0158b40e550232"
+    },
+    "react-router-redux/react-router-redux.d.ts": {
+      "commit": "0d622d857f97d44ea7dcad2b3edec1f23c48fe9e"
+    },
+    "react/react.d.ts": {
+      "commit": "8886ae591751e8a8237fa855617745768f0b1bdf"
+    },
+    "node/node.d.ts": {
+      "commit": "95eb7b2527a28281cdbf480c0560744bc5190465"
+    },
+    "serve-static/serve-static.d.ts": {
+      "commit": "237339b0238845b027431280c72dc663ca534132"
+    },
+    "express-serve-static-core/express-serve-static-core.d.ts": {
+      "commit": "237339b0238845b027431280c72dc663ca534132"
+    },
+    "express/express.d.ts": {
+      "commit": "237339b0238845b027431280c72dc663ca534132"
+    },
+    "mime/mime.d.ts": {
+      "commit": "237339b0238845b027431280c72dc663ca534132"
+    },
+    "react/react-dom.d.ts": {
+      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
+    },
+    "underscore/underscore.d.ts": {
+      "commit": "544a35a10866b32afda9c7f029c0764558563f4f"
+    },
+    "moment/moment.d.ts": {
+      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "310c247694d7f31bd2e3198f71c55221f7c3a3c7"
+    },
+    "redux-thunk/redux-thunk.d.ts": {
+      "commit": "08ed4e9f1869e37e29514d862e0158b40e550232"
+    },
+    "react-router/history.d.ts": {
+      "commit": "8886ae591751e8a8237fa855617745768f0b1bdf"
+    },
+    "react-router/react-router.d.ts": {
+      "commit": "8886ae591751e8a8237fa855617745768f0b1bdf"
+    },
+    "bootstrap/bootstrap.d.ts": {
+      "commit": "398bd742115e2b071ab3edf8b543b6df6fa62dc2"
+    },
+    "classnames/classnames.d.ts": {
+      "commit": "e0abafb1a6ff652f7ff967120e312d5c1916eaef"
+    },
+    "es6-promise/es6-promise.d.ts": {
+      "commit": "d55165c9814f35857ddd8b3083a01a47322174e7"
+    },
+    "isomorphic-fetch/isomorphic-fetch.d.ts": {
+      "commit": "edb64e4a35896510ce02b93c0bca5ec3878db738"
+    },
+    "phantom/phantom.d.ts": {
+      "commit": "b66d6115d7a8cd74af45e59d36c4447e5d1e9a52"
+    },
+    "xlsx/xlsx.d.ts": {
+      "commit": "95eb7b2527a28281cdbf480c0560744bc5190465"
+    },
+    "cheerio/cheerio.d.ts": {
+      "commit": "95eb7b2527a28281cdbf480c0560744bc5190465"
+    },
+    "form-data/form-data.d.ts": {
+      "commit": "95eb7b2527a28281cdbf480c0560744bc5190465"
+    },
+    "request/request.d.ts": {
+      "commit": "95eb7b2527a28281cdbf480c0560744bc5190465"
+    }
+  }
+}

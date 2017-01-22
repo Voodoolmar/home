@@ -1,5 +1,0 @@
-D:\Projects\ReactHome\Home\bin\Home.dll
-D:\Projects\ReactHome\Home\bin\Home.pdb
-D:\Projects\ReactHome\Home\obj\Debug\Home.dll
-D:\Projects\ReactHome\Home\obj\Debug\Home.pdb
-D:\Projects\ReactHome\Home\obj\Debug\Home.csprojResolveAssemblyReference.cache

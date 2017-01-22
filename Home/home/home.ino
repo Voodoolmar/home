@@ -1,7 +1,6 @@
 #include <Wire.h>
 #include "Stater.h"
 #include "PCF8574.h"
-#include <EtherCard.h>
 
 byte bitCount = 8;
 byte chipCount = 2;
@@ -31,47 +30,22 @@ int counterPin3 = 2;
 
 int bpPin = 7;
 
-static byte myip[] = { 
-  192,168,1,200 };
-static byte gwip[] = { 
-  192,168,1,1 };
-static byte dns[] = { 
-  192,168,1,1 };
-
-static byte mymac[] = { 
-  0x74,0x69,0x69,0x2D,0x30,0x31 };
-
 int offVal = 255;
-
-byte Ethernet::buffer[500];
-
-static BufferFiller bfill;  // used as cursor while filling the buffer
 
 void setup()
 {
   Serial.begin(57600);
   Serial.println("Starting");
-  if (ether.begin(sizeof Ethernet::buffer, mymac, 10) == 0) 
-    Serial.println( "Failed to access Ethernet controller");
-  ether.staticSetup(myip, gwip);
-  ether.printIp("IP:  ", ether.myip);
-  ether.printIp("GW:  ", ether.gwip);
-
   initButtons();
-
   Serial.println("Started");
 }
 void loop()
-{
-  word pos = ether.packetLoop(ether.packetReceive());
-  
+{  
   byte value1 = INP_1.read8();
   byte value2 = INP_2.read8();
 
   updateState(state1, value1, 1);
   updateState(state2, value2, 2);
-
-  etherProcess(pos);
 
   updateBpState();
 
@@ -173,93 +147,3 @@ void initButtons()
     buttons[i] = new Stater();
   }
 }
-
-void etherProcess(word pos){
-  if (pos) {
-    bfill = ether.tcpOffset();
-    processParams((char *) Ethernet::buffer + pos);
-    statePage(bfill);
-    ether.httpServerReply(bfill.position());
-  }
-}
-
-void processParams(char* data){
-  if (data)
-  {
-    char* param;
-    strtok(data, " ");
-    param = strtok(NULL, " ");
-    if(strlen(param)<2 || strlen(param)>8) return;
-    byte val = atoi(strtok(param, "/")); 
-    int state = atoi(strtok(NULL, "/"));
-
-    Serial.print(val);    
-    Serial.print(":");    
-    Serial.println(state);
-
-    if(val == 101)a1 = state%256;
-    if(val == 102)a2 = state%256;
-    if(val == 103)a3 = state%256;
-    if(val == 104)a4 = state%256;
-
-    if(val>0 && val<=8){
-      state1 ^= (1 << val-1);
-    }
-    else if (val>8 && val<=16){
-      state2 ^= (1 << val-9);
-    }
-  }
-}
-
-void statePage(BufferFiller& buf) {
-  long t = millis() / 1000;
-  word h = t / 3600;
-  byte m = (t / 60) % 60;
-  byte s = t % 60;
-
-  buf.emit_p(PSTR(
-    "HTTP/1.0 200 OK\r\n"
-    "Content-Type: text/html\r\n"
-    "Access-Control-Allow-Origin: *\r\n"
-    "Pragma: no-cache\r\n"
-    "\r\n"
-    "{"
-    "\"uptime\":\"$D$D:$D$D:$D$D\","), h/10, h%10, m/10, m%10, s/10, s%10);
-
-  for(int i = 0;i<(bitCount*chipCount);++i){
-    boolean on = false;
-    if(i<=7){               
-      if(state1 & (1 << i)){
-        on = false;
-      }
-      else{
-        on = true;
-      }
-    }
-    else if (i>7 && i<=15){            
-      if(state2 & (1 << i-8)){
-        on = false;
-      }
-      else{
-        on = true;
-      }
-    }    
-    if(on){
-      buf.emit_p(PSTR("\"s$D\":true,"), i+1);
-    }
-    else{
-      buf.emit_p(PSTR("\"s$D\":false,"), i+1);
-    }
-  }  
-
-  buf.emit_p(PSTR("\"a1\":$D,"
-    "\"a2\":$D,"
-    "\"a3\":$D,"
-    "\"a4\":$D,"
-    "\"counter1\":$D,"
-    "\"counter2\":$D,"
-    "\"counter3\":$D"
-    "}"), a1,a2,a3,a4,counter1, counter2, counter3);
-}
-
-

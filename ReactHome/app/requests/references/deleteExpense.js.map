@@ -1,0 +1,1 @@
+{"version":3,"file":"deleteExpense.js","sourceRoot":"","sources":["deleteExpense.ts"],"names":[],"mappings":";;;;;;AAAA,sBAAkB,uBAClB,CAAC,CADwC;AAEzC,kCAA8B,mCAE9B,CAAC,CAFgE;AAEjE;IAAmC,iCAAyB;IACxD;QACI,kBAAM,8BAAiB,CAAC,SAAS,EAAE,SAAS,CAAC,CAAC,CAAC;IACnD,CAAC;IACL,oBAAC;AAAD,CAAC,AAJD,CAAmC,kBAAK,GAIvC;AAJY,qBAAa,gBAIzB,CAAA;AAED;qBAAe,IAAI,aAAa,EAAE,CAAC"}

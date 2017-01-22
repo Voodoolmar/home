@@ -1,0 +1,54 @@
+{
+  "name": "plan",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "description": "Test",
+  "author": {
+    "name": "voodo",
+    "email": ""
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "classnames": "^2.2.5",
+    "es6-promise": "^3.2.1",
+    "history": "^2.0.1",
+    "immutable": "3.8.1",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "2.1.4",
+    "jquery-ui": "1.10.5",
+    "moment": "2.13.0",
+    "node-fetch": "^1.5.3",
+    "lodash": "*",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.4",
+    "react-router": "^2.2.1",
+    "react-router-redux": "^4.0.2",
+    "redux": "^3.4.0",
+    "redux-thunk": "2.0.1",
+    "request": "^2.73.0",
+    "object-assign": "4.0.1",
+    "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^2.2.4",
+    "debug": "~2.0.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "3.0.2",
+    "gulp-util": "^3.0.7",
+    "imports-loader": "0.6.5",
+    "webpack": "^1.13.0",
+    "gulp-sass": "^2.3.1",
+    "imports-loader": "0.6.5",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-develop-server": "^0.5.2",
+    "typescript": "2.0.3",
+    "webpack": "^1.13.0"
+  }
+}

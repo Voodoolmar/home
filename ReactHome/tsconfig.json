@@ -1,0 +1,17 @@
+﻿{
+	"compilerOptions": {
+		"module": "commonjs",
+		"jsx": "react",
+		"sourceMap": true,
+		"experimentalDecorators": true,
+		"allowJs": false
+	},
+	"files": [
+		"app/bootstrap.tsx",
+		"server.tsx",
+		"typings/tsd.d.ts"
+	],
+	"exclude": [
+		"node_modules"
+	]
+}

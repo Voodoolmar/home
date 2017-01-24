@@ -5,7 +5,7 @@ var port = __dirname.substr(0,2) == "D:"
                 ? "COM3" 
                 : "/dev/ttyAMA0";
 var serialPort = new SerialPort(port, {
-    baudrate: 9600
+    baudrate: 115200
 });
 
 var delegates = [];

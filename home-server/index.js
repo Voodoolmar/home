@@ -6,4 +6,5 @@ serial.onData(function(data){
 
 serial.onOpen(function() {
     console.log('started');
+    serial.write('started')
 });

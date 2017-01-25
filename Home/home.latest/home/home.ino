@@ -81,6 +81,8 @@ void listenSerial()
             int position = atoi(separator);
   
             
+            digitalWrite(position, HIGH);
+            digitalWrite(id, LOW);
             setValue(id, position);
             // Do something with servoId and position
         }
@@ -111,7 +113,7 @@ void updateBpState(){
 
 void updateState(uint8_t &state, byte newState, byte num)
 { 
-  newState = ~newState;
+  newState = reverseBitsByte(newState);
   byte shift = bitCount * (num-1);
   for (int i = 0; i < bitCount; ++i)
   {
@@ -183,9 +185,26 @@ void setValue(int val, int state){
   }
   else if (val>8 && val<=16){
     if(state > 0){
+      state2 |= (1 << val-9);
+    }else{
       state2 &= ~(1 << val-9);
     }
   }
+}
+
+byte reverseBitsByte(byte input) 
+{
+  byte output = 0;
+  byte bit;
+  for(byte count=1;count<=8;count++)
+  { 
+    bit= input & 0x01;
+    input=input>>1;
+    output=output<<1; 
+    if(bit==1) 
+      output = output+1;
+  }
+  return output;   
 }
 
 void allOff(){

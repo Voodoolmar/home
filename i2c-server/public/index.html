@@ -1,0 +1,198 @@
+﻿<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <title>Smarthome</title>
+</head>
+
+<body style="padding-top: 65px;">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Smarthome</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+    <div class="container" id="container">
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+    <script src="bootstrap.min.js"></script>
+</body>
+
+<script>
+    $(function () {
+        function updateRoom(id, room, container){
+            var $panel = $("#" + id)
+            if(!$panel.length){
+                $panel = createRoom(id, room);
+                container.append($panel);
+            }
+            for (var i in room.lights) {
+                var light = room.lights[i];
+                var btn = $panel.find("#" + i);
+                
+                if(light.status || (light.status == undefined && btn.hasClass("btn-default"))){
+                    btn
+                        .removeClass("btn-default")
+                        .addClass("btn-primary");
+                }else{
+                    btn
+                        .removeClass("btn-primary")
+                        .addClass("btn-default");
+                }
+            }
+        }
+        function createRoom(id, room) {
+
+            var panel = $('<div/>')
+                .attr("id", id)
+                .addClass("panel")
+                .addClass("panel-default");
+
+            var panelHeading = $("<div/>")
+                .addClass("panel-heading")
+                .text(room.name);
+
+            var panelBody = $("<div/>")
+                .addClass("panel-body");
+
+            var buttons = $('<div/>')
+                .addClass("btn-group")
+                .addClass("btn-group-justified");
+
+            var counter = 0;
+            for (var i in room.lights) {
+                if (counter % 3 == 0) {
+                    var buttons = $('<div/>')
+                        .addClass("btn-group")
+                        .addClass("btn-group-justified");
+                }
+                var light = room.lights[i];
+                var button;
+                if (typeof light.status === 'boolean') {
+                    var btn = $("<button/>")
+                        .attr("id", i)
+                        .addClass("btn")
+                        .addClass("btn-default")
+                        .text(light.name);
+                    button = $('<div/>')
+                        .addClass("btn-group")
+                        .append(btn);
+                    btn.click(function(){
+                        var $el = $(this);
+                        if($el.hasClass("btn-default")){
+                            $el
+                                .removeClass("btn-default")
+                                .addClass("btn-primary");
+                        }else{
+                            $el
+                                .removeClass("btn-primary")
+                                .addClass("btn-default");
+                        }
+                        changeState($el.parents(".panel").attr("id"), $el.attr("id"));
+                    });
+                }
+                if (typeof light.status === 'number') {
+                    var dropdownButton = $("<a/>")
+                        .attr("id", i)
+                        .addClass("btn")
+                        .addClass("btn-default")
+                        .addClass("dropdown-toggle")
+                        .attr("data-toggle", "dropdown")
+                        .text(light.name)
+                        .append($("<span/>").addClass("caret"));
+                    var dropdownMenu = $("<ul/>")
+                        .attr("id", i)
+                        .addClass("dropdown-menu")
+                        .append($("<li/>").append($("<a/>").attr("data-val", "1").text("Минимум")))
+                        .append($("<li/>").append($("<a/>").attr("data-val", "128").text("Середина")))
+                        .append($("<li/>").append($("<a/>").attr("data-val", "255").text("Максимум")));
+                    if (counter % 3 == 2) {
+                        dropdownMenu.addClass("dropdown-menu-right")
+                    }
+                    button = $('<div/>')
+                        .addClass("btn-group")
+                        .append(dropdownButton)
+                        .append(dropdownMenu);
+                        
+                    dropdownButton.click(function(){
+                        var $el = $(this);
+                        if($el.hasClass("btn-primary")){
+                            $el
+                                .removeClass("btn-primary")
+                                .addClass("btn-default");
+                        }
+                        changeState($el.parents(".panel").attr("id"), $el.attr("id"), 0);
+                    });
+                    dropdownMenu.click(function(ev){
+                        var $el = $(this);
+                        var $target = $(ev.target);
+                        var dropdownBtn = $el.siblings(".dropdown-toggle")
+                        if(dropdownBtn.hasClass("btn-default")){
+                            dropdownBtn
+                                .removeClass("btn-default")
+                                .addClass("btn-primary");
+                        }
+                        changeState($el.parents(".panel").attr("id"), $el.attr("id"), parseInt($target.attr("data-val")));
+                    });
+                }
+                if (button) {
+                    buttons.append(button)
+                }
+                if (counter % 3 == 0) {
+                    panelBody.append(buttons);
+                }
+                counter++;
+            }
+            
+            panel
+                .append(panelHeading)
+                .append(panelBody);
+                
+            return panel;
+        }
+
+        var socket = io();
+        socket.on('init', function (data) {
+            var $container = $("#container");
+            for (var room in data) {
+                updateRoom(room, data[room], $container);
+            }
+        });
+
+        socket.on('set', function (data) {
+            var $container = $("#container");
+            var lights = {};
+            lights[data.lightId] = {status: data.status}
+            updateRoom(data.roomId, {
+                lights: lights
+            }, $container);
+        });
+        function changeState(roomId, lightId, status){            
+            socket.emit("set", {
+                roomId: roomId,
+                lightId: lightId,
+                status: status
+            })
+        }
+    })
+
+</script>
+
+</html>

@@ -1,4 +1,3 @@
-#include <Wire.h>
 #include "Stater.h"
 #include "PCF8574.h"
 
@@ -39,6 +38,8 @@ void setup()
   Serial.begin(115200);
   initButtons();
   Serial.println("!Started");
+  INP_1.initInp();
+  INP_2.initInp();
 }
 void loop()
 {  

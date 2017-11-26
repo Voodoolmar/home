@@ -24,7 +24,12 @@ PCF8574::PCF8574(int address)
   _address = address;
   Wire.begin();
 }
-
+void PCF8574::initInp()
+{
+  Wire.beginTransmission(_address);
+  Wire.write(B11111111);
+  _error = Wire.endTransmission();
+}
 uint8_t PCF8574::read8()
 {
   Wire.beginTransmission(_address);

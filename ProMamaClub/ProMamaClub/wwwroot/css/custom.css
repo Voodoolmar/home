@@ -1,0 +1,10 @@
+/* your styles go here */
+
+.navbar-brand {
+    background-image: url(../img/logo.png);
+    background-repeat: no-repeat;
+    margin-top: -10px;
+    margin-bottom: -10px;
+    height: 60px;
+    padding-left: 210px;
+}

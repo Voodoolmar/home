@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  promamaclub:
+    image: promamaclub
+    build:
+      context: .
+      dockerfile: ProMamaClub/Dockerfile
+    mem_limit: '500m'

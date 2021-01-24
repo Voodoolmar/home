@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProMamaClub", "ProMamaClub\
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{931B2626-0510-4D16-A285-C2ED67FDE916}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeoBiz.Cms", "SeoBiz.Cms\SeoBiz.Cms.csproj", "{CDC7DD29-B759-49E0-9051-42AEB04723E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{931B2626-0510-4D16-A285-C2ED67FDE916}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{931B2626-0510-4D16-A285-C2ED67FDE916}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{931B2626-0510-4D16-A285-C2ED67FDE916}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC7DD29-B759-49E0-9051-42AEB04723E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC7DD29-B759-49E0-9051-42AEB04723E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC7DD29-B759-49E0-9051-42AEB04723E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC7DD29-B759-49E0-9051-42AEB04723E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

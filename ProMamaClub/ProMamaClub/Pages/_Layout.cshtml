@@ -1,48 +1,85 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+@inject IStyleLoaderService StyleLoaderService;
+
+<!DOCTYPE html>
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@ViewBag.Title - @Constants.SiteName</title>
-    <meta name="description" content="">
+    <title>@ViewData["Title"] - @Constants.SiteName</title>
+    <meta name="description" content="@ViewData["Description"]">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="~/vendor/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/fontastic.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-    <link rel="stylesheet" href="~/vendor/@@fancyapps/fancybox/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="~/css/style.default.css" id="theme-stylesheet">
-    <link rel="stylesheet" href="~/css/style.blue.css" id="theme-stylesheet">
-    <link rel="stylesheet" href="~/css/custom.css" asp-append-version="true">
+    <link rel="shortcut icon" href="~/favicon.ico">
+    <link rel="icon" href="~/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#ffc40d">
+    <meta name="theme-color" content="#ffffff">
+    <script async src="~/js/site.min.js" asp-append-version="true"></script>
 
-    <link rel="shortcut icon" href="favicon.png">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        if (navigator.userAgent.indexOf("Speed Insights") == -1) {
+            (function (d, w, c) {
+                (w[c] = w[c] || []).push(function () {
+                    try {
+                        w.yaCounter47538475 = new Ya.Metrika({
+                            id: 47538475,
+                            clickmap: true,
+                            trackLinks: true,
+                            accurateTrackBounce: true
+                        });
+                    } catch (e) {
+                    }
+                });
 
+                var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else {
+                    f();
+                }
+            })(document, window, "yandex_metrika_callbacks");
+        }
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/47538475" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+    <style>
+        .lazy {width: 100%;}
+        @Html.Raw(StyleLoaderService.Load())
+    </style>
+    @*<link rel="stylesheet" href="~/site.min.css" asp-append-version="true" />*@
 </head>
 <body>
-    @Html.Partial("_Header")    
-    @RenderBody()
-    @Html.Partial("_Footer")
+    <div class="page-loaders" style="display: none;">
+        <div class="loaders">
+            <div class="loader-inner ball-clip-rotate-pulse loader-accent">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
 
-    <environment include="Development">
-        <script src="~/vendor/jquery/jquery.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-        <script src="~/vendor/bootstrap/js/bootstrap.js"></script>
-        <script src="~/vendor/jquery.cookie/jquery.cookie.js"></script>
 
-        <script src="~/vendor/@@fancyapps/fancybox/jquery.fancybox.min.js"></script>
-        <script src="~/js/front.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-                asp-fallback-src="~/vendor/jquery/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
-
+    <div class="theme-main">
+        <div class="wrapper">
+            @Html.Partial("_Header")
+            @Html.Partial("_MobileHeader")
+            @RenderBody()
+            @Html.Partial("_Footer")
+        </div>
+    </div>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+

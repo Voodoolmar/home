@@ -1,0 +1,463 @@
+﻿@page "{id?}"
+@using System.Globalization
+@using System.Web
+@using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure
+@model ProMamaClub.Pages.Admin.PostModel
+
+@{
+    Layout = "_AdminLayout";
+}
+<!-- Include external CSS. -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css">
+
+<!-- Include Editor style. -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.6/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+<link href="~/vendor/cropper/cropper.min.css" rel="stylesheet" type="text/css" />
+@section Scripts{
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script>
+
+    <!-- Include Editor JS files. -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.7.6/js/froala_editor.pkgd.min.js"></script>
+
+    <!-- Initialize the editor. -->
+    <script>
+        $(function() {
+            var $image = $("#imageEditor img");
+            var $inputImage = $('#inputImage');
+
+            var uploadedImageName = 'cropped.jpg';
+            var uploadedImageType = 'image/jpeg';
+            var uploadedImageURL;
+
+            var file;
+
+            var size = "large";
+
+            var cropData = {
+                large: null,
+                middle: null,
+                small: null
+            };
+
+            var options = {
+                aspectRatio: 1.74,
+                zoomOnWheel: false,
+                autoCropArea: 1,
+                crop: function(event) {
+                    $image.cropper('getCroppedCanvas', options).toBlob(function(blob) {
+                        cropData[size] = blob;
+                    });
+                },
+                ready: function(event) {
+                    setTimeout(function() {
+                        $image.cropper('getCroppedCanvas', options).toBlob(function(blob) {
+                            cropData[size] = blob;
+                        });
+                    }, 100)
+                }
+            };
+
+            $image.cropper(options);
+
+
+            $(".image-size button").click(function(e, b, c) {
+                $(this)
+                    .addClass("active")
+                    .siblings()
+                    .removeClass("active");
+
+                size = $(this).data("size");
+                switch (size) {
+                case "large":
+                    options.aspectRatio = 1.746;
+                    options.width = 1100;
+                    options.height = 630;
+                    break;
+                case "middle":
+                    options.aspectRatio = 1.14;
+                    options.width = 400;
+                    options.height = 350;
+                    break;
+                case "small":
+                    options.aspectRatio = 1;
+                    options.width = 60;
+                    options.height = 60;
+                    break;
+                }
+                $image.cropper('destroy').cropper(options);
+            });
+
+
+            $("#save").click(function() {
+
+                if (!cropData.large) {
+                    alert("Выберите область для большой картинки");
+                    return;
+                }
+                if (!cropData.middle) {
+                    alert("Выберите область для средней картинки");
+                    return;
+                }
+                if (!cropData.small) {
+                    alert("Выберите область для маленькой картинки");
+                    return;
+                }
+
+                var formData = new FormData();
+
+                // add assoc key values, this will be posts values
+                formData.append("large", cropData.large, file.name);
+                formData.append("middle", cropData.middle, file.name);
+                formData.append("small", cropData.small);
+                formData.append("upload_file", true);
+
+                formData.append("fileName", file.name);
+                $("#image-load-alert").addClass("hide");
+
+                var $spinner = $("<i class='fa fa-spinner fa-spin'></i>");
+                $("#save").append($spinner);
+                $.ajax({
+                    type: "POST",
+                    url: "/Upload/PostImages",
+                    success: function(data) {
+                        $("[name='@Html.NameFor(x => x.Post.Image)']").val(data.filename);
+
+                        $("#middle-image").attr("src", "/images/middle/" + data.filename);
+                        $("#small-image").attr("src", "/images/small/" + data.filename);
+                    },
+                    error: function(error) {
+                        // handle error
+                        $("#image-load-alert").removeClass("hide");
+                    },
+                    complete: function() {
+                        $spinner.remove();
+                    },
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 60000
+                });
+
+
+            });
+
+
+            // Import image
+            if (URL) {
+                $inputImage.change(function() {
+                    var files = this.files;
+
+                    if (!$image.data('cropper')) {
+                        return;
+                    }
+
+                    if (files && files.length) {
+                        file = files[0];
+
+                        if (/^image\/\w+$/.test(file.type)) {
+                            uploadedImageName = file.name;
+                            uploadedImageType = file.type;
+
+                            if (uploadedImageURL) {
+                                URL.revokeObjectURL(uploadedImageURL);
+                            }
+
+                            uploadedImageURL = URL.createObjectURL(file);
+                            $image.cropper('destroy').attr('src', uploadedImageURL).cropper(options);
+                            $inputImage.val('');
+                        } else {
+                            window.alert('Please choose an image file.');
+                        }
+                    }
+                });
+            } else {
+                $inputImage.prop('disabled', true).parent().addClass('disabled');
+            }
+
+
+            $.FroalaEditor.RegisterCommand('customquote',
+                {
+                    // Button title.
+                    title: 'Цитата',
+                    icon: 'quote',
+                    undo: true,
+                    focus: true,
+                    showOnMobile: true,
+                    refreshAfterCallback: true,
+                    callback: function() {
+                        var selection = this.selection.text();
+                        var text = "";
+                        text += "<blockquote class='dg-blockquote left-border ml-30 border-accent'>";
+                        text += "<p class='mb-10'>";
+                        text += selection;
+                        text += "</p>";
+                        text += "<footer>";
+                        text += "<b class='mr-5'>Frank Bill, </b>founder of company";
+                        text += "</footer>";
+                        text += "</blockquote>";
+
+                        this.html.insert(text);
+                    },
+
+                    // Called when the button state might have changed.
+                    refresh: function($btn) {
+                        // The current context is the editor instance.
+                        console.log(this.selection.element());
+                    }
+                });
+
+            $.FroalaEditor.DefineIcon('anchor', { NAME: 'anchor' });
+            $.FroalaEditor.RegisterCommand('anchor',
+                {
+                    // Button title.
+                    title: 'Выделение буквы',
+                    icon: 'anchor',
+                    undo: true,
+                    focus: true,
+                    showOnMobile: true,
+                    refreshAfterCallback: true,
+                    callback: function() {
+                        var selection = this.selection.text();
+                        var text = "";
+                        text += "<span class='dropcap border-accent color-accent'>";
+                        text += selection;
+                        text += "</span>";
+
+                        this.html.insert(text);
+                    },
+
+                    // Called when the button state might have changed.
+                    refresh: function($btn) {
+                        // The current context is the editor instance.
+                        console.log(this.selection.element());
+                    }
+                });
+
+            $.FroalaEditor.DefineIcon('lamp', { NAME: 'lamp' });
+            $.FroalaEditor.RegisterCommand('lamp',
+                {
+                    // Button title.
+                    title: 'Блок идея',
+                    icon: 'lamp',
+                    undo: true,
+                    focus: true,
+                    showOnMobile: true,
+                    refreshAfterCallback: true,
+                    callback: function() {
+                        var selection = this.selection.text();
+                        var text = "";
+                        text += "<figure class='block idea'>";
+                        text += selection;
+                        text += "</figure>";
+
+                        this.html.insert(text);
+                    },
+
+                    // Called when the button state might have changed.
+                    refresh: function($btn) {
+                        // The current context is the editor instance.
+                        console.log(this.selection.element());
+                    }
+                });
+
+            $.FroalaEditor.DefineIcon('info', { NAME: 'info-circle' });
+            $.FroalaEditor.RegisterCommand('info',
+                {
+                    // Button title.
+                    title: 'Блок информация',
+                    icon: 'info',
+                    undo: true,
+                    focus: true,
+                    showOnMobile: true,
+                    refreshAfterCallback: true,
+                    callback: function() {
+                        var selection = this.selection.text();
+                        var text = "";
+                        text += "<figure class='block info'>";
+                        text += selection;
+                        text += "</figure>";
+
+                        this.html.insert(text);
+                    },
+
+                    // Called when the button state might have changed.
+                    refresh: function($btn) {
+                        // The current context is the editor instance.
+                        console.log(this.selection.element());
+                    }
+                });
+
+            $("[name='@Html.NameFor(x => x.Post.Body)']").froalaEditor({
+                imageDefaultDisplay: 'inline',
+                imageDefaultAlign: 'left',
+                imageDefaultWidth: 50,
+                imageResizeWithPercent: true,
+                fontFamily: {
+                    "Roboto,sans-serif": 'Roboto'
+                },
+                paragraphStyles: {
+                    "fs-18": 'Предисловие',
+                    "mt-20 mb-20 bold": 'Для подзаголовка'
+                },
+                imageUploadURL: '/upload',
+                toolbarButtons: [
+                    'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', '|', 'bold', 'italic',
+                    'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', '|', 'color',
+                    'emoticons', 'paragraphStyle', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile',
+                    'insertTable', '|', 'insertHR', 'undo', 'redo', 'clearFormatting', 'selectAll', 'customquote',
+                    'anchor', 'lamp', 'info', 'html'
+                ]
+            });
+
+            $("[name=@Html.NameFor(x => x.RootCategoryId)]").change(function() {
+                $.get("/Ajax/GetCategory", { id: this.value })
+                    .done(function(data) {
+                        var $dropdown = $("[name='@Html.NameFor(x => x.Post.CategoryId)']");
+                        $dropdown.html('');
+                        $.each(data.subcategories,
+                            function() {
+                                $dropdown.append($("<option />").val(this.category.id).text(this.category.title));
+                            });
+                    });
+            });
+        });
+    </script>
+}
+
+
+<section id="page-content" class="sidebar-right pt-40">
+    <div class="container">
+        <div class="row">
+            <div asp-validation-summary="All"></div>
+            <form method="post" id="postForm">
+                <div class="col-sm-12 col-md-9 main-content">
+                    <div class="blog-detail">
+
+                        <div id="imageEditor" style="margin-bottom: 10px" class="detail-images">
+                            <img alt="@Model.Post.Title" src="@Model.LargeImage" class="img-responsive">
+                        </div>
+                        <div class="row mb-20">
+                            <div class="col-md-12">
+                                <div class="btn-group image-size">
+                                    <button type="button" data-size="large" class="btn btn-primary active">Основная</button>
+                                    <button type="button" data-size="middle" class="btn btn-primary">Средняя</button>
+                                    <button type="button" data-size="small" class="btn btn-primary">Маленькая</button>
+                                </div>
+                                <div class="btn-group">
+                                    <label class="btn btn-primary" for="inputImage" title="Загрузить картинку">
+                                        <input type="file" class="sr-only" id="inputImage" name="file" accept=".jpg,.jpeg,.png,.gif,.bmp,.tiff">
+                                        <span class="fa fa-upload"></span>
+                                    </label>
+                                </div>
+                                <div class="btn-group">
+                                    <button type="button" id="save" class="btn btn-primary">Сохранить</button>
+                                </div>
+                                <span id="image-load-alert" class="label bg-danger hide">Ошибка при загрузке</span>
+                            </div>
+                        </div>
+                        <!--Detail Title-->
+                        <div class="detail-title-info">
+                            <div class="detail-date"><span class="day">@Model.Date.Day</span><span class="month">@Model.Date.ToString("MMM", new CultureInfo("RU-ru"))</span></div>
+                            <div class="ver-mid">
+                                <h1 id="titleEditor" class="detail-title">
+                                    @Html.TextAreaFor(x => x.Post.Title, new { style = "width:600px;height:48px;border:none;outline:none", rows = 1 })
+                                </h1>
+                                @*<div class="list-info">
+                                    <span class="fa fa-tag2"></span>
+                                    <span id="tagsEditor">@Html.TextBoxFor(x => x.Post.Tags, new { style = "width:600px;border:none;outline:none" })</span>
+                                </div>*@
+                            </div>
+                        </div>
+                        <!--Detail Title End-->
+                        <!--Detail Description-->
+                        <div class="detail-description">
+                            <textarea name="@Html.NameFor(x => x.Post.Body)">
+
+							@if (!string.IsNullOrEmpty(Model.Post.Body))
+							{
+								@Html.Raw(Model.Post.Body)
+							}
+							else
+							{
+                            <p class="fs-18">Nam volutpat aliquam sem, in tristique felis luctus consectetur. In molestie quis velit eget mattis. Vivamus libero eros, euismod bibe ndum vel, aliquet a nunc. Proin viverra eleifend metus, sit amet bibendum orci. . Proin venenatis purus a ipsum porttitor, sed cursus libero bibendu nean auctor felis et sagittis etas.</p>
+                            <blockquote class="dg-blockquote left-border ml-30 border-accent">
+                            <p class="mb-10">“Aenean ligulabh, molestie vierra. mattis diam velacus tincidunt elementum. Sed viae adipiscing turpis. Donec vest blum justo a diam ultricies pellentesque. Quisque mattis diam vel lacus tincidunt elementum. Nullam dictum felis eorem ipsum dolor sit amet.Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.</p>
+                            <footer><b class="mr-5">Frank Bill, </b>founder of company</footer>
+									</blockquote>
+                            <h2 class="mt-20 mb-20 bold">How to make full use of your website?</h2>
+                            <p> Proin luctus eu erat quis tincidunt. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse ullamcorper nunc eu placerat fermentum. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Etiam scelerisque iaculis felis, eu sollicitudin arcu hendrerit vitae. Aliquam eget dapibus nulla. In nulla enim, fermentum nec placerat hendrerit, sagittis et diamer nunc eu placerat fermentum. </p>
+                            <p>
+                            <span class="dropcap border-accent color-accent">M</span>
+										auris viverra, dui at cursus suscipit, lectus hendrerit anute, nec iaculis felis nulla quils tellus. In rhoncus pharetra ailm. Quisque tortor odio, feugiat vitae velitndle atncuion, feuiat euismod nunc. Morbi lectus nellque, mollis quis tellus eget, placerat viverra enim. Sed rhoncus neque sed adipiscing bibendum. Ut euiod metus non pulvinar. Curabitur rutrum et lectus egestas sollicit diaun. Suspendisse suscipit libero.vitae pretium lac.vitae pretium lac.vitae ,
+										Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam dui libero, tempor quis congue in, interdum eget tortor. Nam et urna ante, vitae pretium lacus vehicula. Sed rhoncus ullamcorper mauris, ac condimentum metus egestas ut. Nam et urna ante,
+									</p>
+                            <h2 class="mt-20 mb-20 bold">What should you do?</h2>
+                            <figure class="block idea">
+										Quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore hendrerit in vulputate velit esse molestie consequat magnam vel illum dolore feugiat aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit esse quam nihil molestiae consequatur beatae illum vitae dicta sunt explicabo.
+									</figure>
+                            <h2 class="mt-20 mb-20 bold">What should you do?</h2>
+                            <figure class="block info">
+										Quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore hendrerit in vulputate velit esse molestie consequat magnam vel illum dolore feugiat aliquam quaerat voluptatem. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit esse quam nihil molestiae consequatur beatae illum vitae dicta sunt explicabo.
+									</figure>
+                            <ul>
+                            <li>Lorem ipsum dolor sit amet ornare adipiscing qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</li>
+                            <li>Second item non metus enimvitae tristique pulvinar aliquet qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</li>
+                            <li>
+											Sublist vitae metus an vitae sapien qui dolorem ipsum quia dolor sit amet.
+                            <ol>
+                            <li>Phasellus vitae metus vitae sapien commodo, vehicula</li>
+                            <li>Vestibulum ante ipsum primis in faucib</li>
+                            <li>Proin elit arcu, rutrum commodoullamcorper leo</li>
+											</ol>
+										</li>
+                            <li>Third item egestas qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</li>
+                            <li>Donec sollicitudin mi sit amet mauris sed magna qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</li>
+									</ul>
+                            <p class="mt-20"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto in ea voluptate velit esse quam nihil molestiae consequatur beatae illum vitae dicta sunt explicabo. </p>
+					
+							}		
+							</textarea>
+                        </div>
+                        <!--Detail Description End-->
+
+                    </div>
+                    <div class="pb-60"></div>
+                </div>
+                <div class="col-sm-12 col-md-3 sidebar">
+                    <div class="blog-sidebar-content">
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.RootCategoryId, "Категория")
+                            @Html.DropDownListFor(x => x.RootCategoryId, Model.RootCategories, "Категория...", new { @class = "form-control" })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Post.CategoryId, "Подкатегория")
+                            @Html.DropDownListFor(x => x.Post.CategoryId, Model.Categories, "Подкатегория...", new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.Post.Description, "Краткое описние")
+                            @Html.TextAreaFor(x => x.Post.Description, new { rows = "3", @class = "form-control" })
+                        </div>
+                        @Html.HiddenFor(x => x.Post.Id)
+                        @*@Html.HiddenFor(x => x.Post.Title)*@
+                        @Html.HiddenFor(x => x.Post.Tags)
+                        @Html.HiddenFor(x => x.Post.Image)
+                        @Html.HiddenFor(x => x.Post.RowVersion)
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+
+                        <div class="row mt-20">
+                            <img alt="@Model.Post.Title" id="middle-image" src="@Model.MiddleImage" class="img-responsive">
+                        </div>
+                        <div class="row mt-20">
+                            <img alt="@Model.Post.Title" id="small-image" src="@Model.SmallImage" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

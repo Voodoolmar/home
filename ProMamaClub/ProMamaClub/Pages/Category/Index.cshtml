@@ -1,0 +1,32 @@
+﻿@page "{id?}"
+@model Category.IndexModel
+@{
+    ViewData["Title"] = Model.CategoryName;
+    ViewData["CategoryId"] = Model.CategoryId;
+    Layout = "_CategoryLayout";
+    ViewData["Description"] = Model.CategoryDescription;
+}
+
+@section PageTitle
+    {
+    <div class="pagetitleBox pagetitle-layout-center pagetitle-md pagetitle-grey mb-0">
+        <div class="container ">
+            <div class="pagetitle-border">
+                <h1 class="title">@Model.CategoryName </h1>
+                <div class="pagetitle-info">
+                    @Model.CategoryDescription
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@foreach (var article in Model.Articles)
+{
+    @Html.Partial("_CategoryArticlePreview", article)
+}
+
+<div class="blog-page text-center">
+        <a asp-route-skip="@(Model.Skip>0 ? Model.Skip - 10 : 0)">Предыдущая</a> 
+        <a asp-route-skip="@(Model.Skip + 10)">Следущая</a>
+</div>

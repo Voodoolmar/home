@@ -1,0 +1,32 @@
+﻿@using SeoBiz.Cms.Comments
+@model Comments.MessageModel
+<div class="comments-post">
+    <div class="comments-portrait">
+        <div class="comments-name">@Model.CommentAuthor</div>
+    </div>
+    <div class="comments-main">
+        <p>@Model.Text</p>
+        <div class="comments-info">
+            @Model.Date.ToString("dd.MM.yyyy HH:mm")
+
+            @if ((bool)ViewData["authenticated"] && Model.State != CommentState.Approved)
+            {
+                <span class="sep">|</span>
+                <span class="reply-btn"><a href="#" data-comment-id="@Model.Id">Подтвердить</a></span>
+                <span class="sep">|</span>
+                <span class="remove-btn"><a href="#" data-comment-id="@Model.Id">Удалить</a></span>
+            }
+        </div>
+        @if (Model.Reply != null)
+        {
+            <div class="comments-reply">
+                <div class="reply-post">
+                    <div class="reply-main">
+                        <p>@Model.Reply.Text</p>
+                        <div class="reply-info">@Model.Reply.Date.ToString("dd.MM.yyyy HH:mm") </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

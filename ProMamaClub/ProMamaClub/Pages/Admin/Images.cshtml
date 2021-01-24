@@ -1,0 +1,13 @@
+﻿@page
+@model ProMamaClub.Pages.Admin.ImagesModel
+@{
+    ViewData["Title"] = "Images";
+    Layout = "_Layout";
+}
+
+<h2>Images</h2>
+
+@foreach (var file in Model.Files)
+{
+    <img src="@file"/>
+}

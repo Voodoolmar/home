@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  promamaclub:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+    mem_limit: '500m'

@@ -1,0 +1,15 @@
+﻿
+@model Models.RecentArticlePreview
+
+
+<li>
+    <div class="pic">
+        <img src="@Model.ArticlePictureUrl" style="width: 60px" alt="@Model.Title">
+    </div>
+    <div class="box-right">
+        @{
+            var url = "/Post/" + Model.Id;
+        }
+        <div class="title"><a href="@url" title="@Model.Title">@Model.Title</a></div>
+    </div>
+</li>

@@ -1,60 +1,113 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
-
-<header class="header">
-    <!-- Main Navbar-->
-    <nav class="navbar navbar-expand-lg">
-        <div class="search-area">
-            <div class="search-area-inner d-flex align-items-center justify-content-center">
-                <div class="close-btn"><i class="icon-close"></i></div>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-8">
-                        <form action="#">
-                            <div class="form-group">
-                                <input type="search" name="search" id="search" placeholder="Что ищем?">
-                                <button type="submit" class="submit"><i class="icon-search-1"></i></button>
+﻿<header class="header-bg roll-menu header-navbar header-not-float" data-top="250">
+    <div class="hidden-xs hidden-sm headerBox ">
+        <div class="shade"></div>
+        <div class="clearfix">
+            <div class="container">
+                <div id="megamenuWidthBox"></div>
+            </div>
+            <div class="header-top">
+                <div class="container">
+                    <div class="header-left">
+                        <div class="logo-main">
+                            <div class="Logobox">
+                                <a title="Logo" asp-page="/Index">
+                                    @Html.Partial("_Logo", new LogoModel(60))
+                                </a>
                             </div>
-                        </form>
+                        </div>
+                    </div>
+                    <div class="header-right text-right">
+                        <ul class="header-control2">
+                            <li>
+                                <div class="headar-search">
+                                    @*<input type="text" class="textbox" placeholder="Найти...">
+                                    <button type="button" class="search"><span class="fa fa-search"></span></button>*@
+
+
+                                    <div class="ya-site-form ya-site-form_inited_no" onclick="return { 'action': 'https://promamaclub.ru/Search', 'arrow': false, 'bg': 'transparent', 'fontsize': 12, 'fg': '#000000', 'language': 'ru', 'logo': 'rb', 'publicname': 'Поиск по promamaclub.ru', 'suggest': true, 'target': '_self', 'tld': 'ru', 'type': 3, 'usebigdictionary': true, 'searchid': 2319414, 'input_fg': '#000000', 'input_bg': '#ffffff', 'input_fontStyle': 'normal', 'input_fontWeight': 'normal', 'input_placeholder': 'поиск по сайту...', 'input_placeholderColor': '#000000', 'input_borderColor': '#7f9db9' }">
+
+                                        <form action="https://yandex.ru/search/site/" method="get" target="_self" accept-charset="utf-8">
+                                            <input type="hidden" name="searchid" value="2319414"/>
+                                            <input type="hidden" name="l10n" value="ru"/>
+                                            <input type="hidden" name="reqenc" value=""/>
+                                            <input type="search" name="text" class="textbox" value=""/>
+                                            <button type="submit" value="Найти" class="search"><span class="fa fa-search"></span></button>
+                                        </form>
+                                    </div>
+
+                                    <style type="text/css">
+                                        .ya-page_js_yes .ya-site-form_inited_no {
+                                            display: none;
+                                        }
+                                    </style>
+                                    <script type="text/javascript">
+                                        if (navigator.userAgent.indexOf("Speed Insights") == -1) {
+                                            (function(w, d, c) {
+                                                var s = d.createElement('script'),
+                                                    h = d.getElementsByTagName('script')[0],
+                                                    e = d.documentElement;
+                                                if ((' ' + e.className + ' ').indexOf(' ya-page_js_yes ') === -1) {
+                                                    e.className += ' ya-page_js_yes';
+                                                }
+                                                s.type = 'text/javascript';
+                                                s.async = true;
+                                                s.charset = 'utf-8';
+                                                s.src = (d.location.protocol === 'https:' ? 'https:' : 'http:') +
+                                                    '//site.yandex.net/v2.0/js/all.js';
+                                                h.parentNode.insertBefore(s, h);
+                                                (w[c] || (w[c] = [])).push(function() { Ya.Site.Form.init() })
+                                            })(window, document, 'yandex_site_callbacks');
+                                        }
+                                    </script>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <!-- Navbar Brand -->
-            <div class="navbar-header d-flex align-items-center justify-content-between">
-                <!-- Navbar Brand -->
-                <a href="/" class="navbar-brand">
-                </a>
-                <!-- Toggle Button-->
-                <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"><span></span><span></span><span></span></button>
-            </div>
-            <!-- Navbar Menu -->
-            <div id="navbarcollapse" class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a href="/" class="nav-link @(ViewBag.IsHome ? "active" : "")">Главная</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="Beremennost" class="nav-link ">Беременность</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="Rody" class="nav-link ">Роды</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="Deti" class="nav-link ">Дети</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Dropdown</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="header-bottom">
+                <div class="container">
+
+                    <div class="header-left">
+                        <div class="logo-main">
+                            <div class="FixedLogoPane">
+                                <a title="Logo" asp-page="/Index">
+                                    @Html.Partial("_Logo", new LogoModel(36))
+                                </a>
+                            </div>
                         </div>
-                    </li>
-                </ul>
-                <div class="navbar-text"><a href="#" class="search-btn"><i class="icon-search-1"></i></a></div>
+                    </div>
+                    <div class="header-left">
+                        <nav class="nav-box clearfix menu-hover-line ">
+                            <div class="menu-main">
+                                <div id="dng-megamenu">
+                                    @Html.Partial("_Menu")
+                                </div>
+                            </div>
+
+                        </nav>
+                    </div>
+                    @*<div class="header-right text-right">
+                            <div class="menuRightBox">
+                                <div class="search-popup-box">
+                                    <div class="icon"><span class="fa fa-search"></span></div>
+                                    <div class="popup-content">
+                                        <div class="popup-close"><span class="fa fa-cross2"></span></div>
+                                        <div class="popup-center">
+
+                                            <form name="formsearch" method="get">
+                                                <input name="s" id="search" type="text" class="text" value="" placeholder="START TYPING AND PRESS ENTER TO SEARCH">
+                                                <button type="submit" class="submit"><span class="fa fa-search"></span></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+                </div>
             </div>
         </div>
-    </nav>
+    </div>
 </header>
+
+

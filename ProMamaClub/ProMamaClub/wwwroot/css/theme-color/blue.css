@@ -1,0 +1,336 @@
+﻿/*Accent Color 1~4*/
+.btn-accent {
+  color: #20a3f0;
+  border-color: #20a3f0;
+  background-color: #20a3f0;
+}
+
+[class*="dg-btn-"].btn-accent:before {
+  background-color: #20a3f0;
+}
+
+/*a*/
+A,
+A:link {
+  color: #20a3f0;
+}
+
+  A:active {
+    color: #20a3f0;
+  }
+
+  A:visited {
+    color: #20a3f0;
+  }
+
+  A:hover {
+    color: #20a3f0;
+  }
+
+  A:focus {
+    color: #20a3f0;
+  }
+
+
+
+/*footer*/
+.footer-box a:hover {
+  color: #20a3f0;
+}
+
+
+
+
+/*page-title*/
+.breadcrumb-box a:hover {
+  color: #20a3f0;
+}
+
+
+
+/*blog*/
+.blog-classic2-list .list-title a:hover {
+  color: #20a3f0;
+}
+
+.blog-classic2-list .list-info a:hover {
+  color: #20a3f0;
+}
+
+.blog-classic2-list .list-more {
+  color: #20a3f0;
+}
+
+.blog-classic2-list .list-info a:hover {
+  color: #20a3f0;
+}
+
+.blog-detail .list-info a:hover {
+  color: #20a3f0
+}
+
+.blog-detail .detail-date .month {
+  background-color: #20a3f0;
+}
+
+.detail-recent .title a:hover {
+  color: #20a3f0;
+}
+
+
+
+/*header*/
+#dng-megamenu-mobile a:hover {
+  color: #20a3f0;
+}
+
+#dng-megamenu .primary-structure > li:hover > a,
+#dng-megamenu .primary-structure > li.current > a {
+  color: #20a3f0;
+}
+
+#dng-megamenu .slide-menu li:hover > a {
+  background-color: #20a3f0;
+}
+
+.menu-hover-line #dng-megamenu .primary-structure > li > a > span:before {
+  border-bottom: 2px solid #20a3f0;
+}
+
+
+/*widget*/
+.widget-posts .title a:hover {
+  color: #20a3f0;
+}
+
+
+
+
+/*portfolios*/
+
+
+
+/*theme*/
+
+
+/*accordions*/
+
+
+
+
+/*carousel*/
+
+
+
+/*chart*/
+
+
+
+
+/*clients*/
+
+
+
+/*flip-box*/
+
+
+
+/*imagebox*/
+
+
+
+/*loader*/
+.loader-accent.ball-clip-rotate-pulse > div:first-child {
+  background-color: #20a3f0;
+}
+
+.loader-accent.ball-clip-rotate-pulse > div:last-child {
+  border-top-color: #20a3f0;
+  border-bottom-color: #20a3f0;
+}
+
+
+
+
+/*modal*/
+
+
+
+/*number*/
+
+
+
+/*ourteam*/
+
+
+
+/*pagepiling*/
+
+
+
+/*player*/
+
+
+/*side-panel*/
+
+
+
+/*tab*/
+
+
+
+/*testimonial*/
+
+
+
+/*thumbnail*/
+
+
+
+
+/*dgTitle*/
+
+
+
+/*form-style*/
+
+
+
+
+/*icon-box*/
+
+
+
+/*line*/
+
+
+
+/*list*/
+
+
+
+/*pricing*/
+
+
+/*homepage01*/
+
+
+
+/*homepage02*/
+
+
+
+/*homepage03*/
+
+
+
+/*homepage04*/
+
+
+
+/*homepage05*/
+
+
+
+/*homepage06*/
+
+
+
+/*homepage09*/
+
+
+
+/*homepage10*/
+
+
+
+
+/*homepage11*/
+
+
+
+/*homepage12*/
+
+
+
+/*homepage13*/
+
+
+
+/*homepage14*/
+
+
+
+/*homepage15*/
+
+
+/*homepage16*/
+
+
+/*homepage17*/
+
+
+
+/*homepage19*/
+
+/*homepage20*/
+
+
+
+/*AboutUs01*/
+
+
+/*AboutUs03*/
+
+
+
+/*AboutUs04*/
+
+
+
+/*ContactUs02*/
+
+/*ContactUs05*/
+
+
+
+/*Faq02*/
+/*OurServices01*/
+
+
+
+/*OurTeam01*/
+
+
+
+/*OurTeam02*/
+
+
+/*homepage06*/
+/*homepage17*/
+/*AboutUs02*/
+/*AboutUs05*/
+/*ContactUs02*/
+/*OurTeam02*/
+
+
+
+/*commingsoon*/
+
+
+/*list*/
+
+
+
+/*MegaMenu*/
+
+
+
+/*ourteam*/
+
+
+
+/*backtop*/
+
+
+/*dark*/

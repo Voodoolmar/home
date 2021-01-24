@@ -1,0 +1,24 @@
+﻿@charset "UTF-8";
+
+.footer-02 .footer-bottom {
+  color: #aaaaaa;
+  padding: 28px 0;
+  font-size: 13px;
+  background-color: #121212;
+  text-align: center;
+}
+
+.footer-box a:link,
+.footer-box a:active,
+.footer-box a:visited {
+  color: inherit;
+}
+
+.footer-box a:hover {
+  color: #20a3f0;
+  text-decoration: none;
+}
+
+.footer-box .sep {
+  padding: 0 12px;
+}

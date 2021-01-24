@@ -1,0 +1,17 @@
+﻿@model Comments.IndexModel
+<h4 class="detail-heading">Коментарии</h4>
+<!--Detail Comments -->
+<div class="detail-comments">
+    @if (!Model.Messages.Any())
+    {
+        <div class="pl-20 pb-30">Коментариев пока нет.</div>
+    }
+    else
+    {
+        foreach (var message in Model.Messages)
+         {
+             Html.RenderPartial("Comments/_Message", message);
+         }
+    }
+</div>
+<!--Detail Comments End-->

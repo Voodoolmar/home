@@ -6,6 +6,7 @@ FROM microsoft/aspnetcore-build:2.0 AS build
 WORKDIR /src
 COPY *.sln ./
 COPY ProMamaClub/ProMamaClub.csproj ProMamaClub/
+COPY SeoBiz.Cms/SeoBiz.Cms.csproj SeoBiz.Cms/
 RUN dotnet restore
 COPY . .
 WORKDIR /src/ProMamaClub

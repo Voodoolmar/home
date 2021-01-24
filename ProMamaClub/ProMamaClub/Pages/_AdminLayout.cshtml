@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@RenderSection("PageTitle", false)
+
+<header class="header-bg roll-menu header-navbar header-not-float" data-top="250">
+    <div class="hidden-xs hidden-sm headerBox ">
+        <div class="shade"></div>
+        <div class="clearfix">
+            <div class="header-bottom">
+                <div class="container">
+                    <div class="header-left">
+                        <nav class="nav-box clearfix menu-hover-line ">
+                            <div class="menu-main">
+                                <div id="dng-megamenu">
+                                    <ul class="primary-structure">
+                                        <li class="current">
+                                            <a asp-page="/Admin/Category" asp-route-id="">Категории</a>
+                                            <a asp-page="/Admin/Post" asp-route-id="">Новый пост</a>
+                                            <a asp-page="/Admin/Posts" asp-route-id="">Все статьи</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+@RenderBody()
+
+@section Scripts{
+    @RenderSection("Scripts", required: false)
+}

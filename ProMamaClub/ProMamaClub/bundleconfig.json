@@ -2,23 +2,59 @@
 // More info at https://go.microsoft.com/fwlink/?LinkId=808241
 [
   {
-    "outputFileName": "wwwroot/css/custom.min.css",
+    "outputFileName": "wwwroot/site.min.css",
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
-      "wwwroot/css/custom.css"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/custom.min.js",
-    "inputFiles": [
-      "wwwroot/js/custom.js"
+      "wwwroot/css/theme.css",
+      "wwwroot/css/header.css",
+      "wwwroot/css/footer.css",
+      "wwwroot/css/page-title.css",
+      "wwwroot/css/blog.css",
+      "wwwroot/css/sidebar.css",
+      "wwwroot/css/widget.css",
+
+      "wwwroot/css/dnngo-font-icon.css",
+
+      "wwwroot/css/component/loaders.css",
+
+      "wwwroot/css/elements/blockquotes.css",
+      "wwwroot/css/elements/dropcap.css",
+      "wwwroot/css/elements/button.css",
+      "wwwroot/css/elements/list.css",
+
+      "wwwroot/css/theme-color/blue.css",
+
+      "wwwroot/css/demos/homepage06.css",
+
+      "wwwroot/css/fonts.css",
+      "wwwroot/css/froala.style.css",
+      "wwwroot/css/custom.css",
+
+      "wwwroot/vendor/bootstrap/css/bootstrap.purified.css"
     ],
-    // Optionally specify minification options
     "minify": {
       "enabled": true,
       "renameLocals": true
-    },
-    // Optionally generate .map file
-    "sourceMap": false
-  }
+    }
+  },
+	{
+		"outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/vendor/jquery/jquery.min.js",
+      "wwwroot/js/clamp.js",
+      "wwwroot/vendor/cropper/cropper.min.js",
+      "wwwroot/vendor/cropper/jquery-cropper.min.js",
+      "wwwroot/js/theme-functions.js",
+      "wwwroot/js/isotope.js",
+      "wwwroot/js/jquery.lazy.js",
+      "wwwroot/js/custom.js"
+    ],
+		// Optionally specify minification options
+		"minify": {
+			"enabled": true,
+			"renameLocals": true
+		},
+		// Optionally generate .map file
+		"sourceMap": false
+	}
 ]

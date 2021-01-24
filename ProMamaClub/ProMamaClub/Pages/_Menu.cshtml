@@ -1,0 +1,35 @@
+﻿@using SeoBiz.Cms.Categories
+@inject ICategoryService CategoryService;
+<ul class="primary-structure">
+    @{
+        var main = false;
+        string rootCategoryId = null;
+        if (!string.IsNullOrEmpty((string) ViewData["RootCategoryId"]))
+        {
+            rootCategoryId = (string) ViewData["RootCategoryId"];
+        }
+        else
+        {
+            main = true;
+        }
+    } 
+
+    <li class="@(main ? "current" : "")">
+        <a href="/" title="Главная"><span>Главная</span></a>
+    </li>
+
+    @foreach (var item in CategoryService.GetRootCategories())
+    {
+        <li class="dir @(item.Category.Id == rootCategoryId ? "current" : "")">
+            <a asp-page="/Category/Index" asp-route-id="@item.Category.Id" title="@item.Category.Title"><span>@item.Category.Title</span></a>
+            <div class="menuslide">
+                <ul class="slide-menu ">
+                    @foreach (var subitem in item.Subcategories ?? new CategoryViewItem[0])
+                    {
+                        <li><a asp-page="/Category/Index" asp-route-id="@subitem.Category.Id" title="@subitem.Category.Title"><span>@subitem.Category.Title</span></a></li>
+                    }
+                </ul>
+            </div>
+        </li>
+    }
+</ul>

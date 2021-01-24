@@ -1,0 +1,67 @@
+﻿.sidebar-right {
+  overflow: hidden;
+}
+
+
+/* sidebar-left */
+
+
+/* sidebar-left END */
+
+
+/* sidebar-right */
+
+.sidebar-right .main-content {
+  float: left;
+  padding-right: 25px;
+}
+
+.sidebar-right .sidebar {
+  float: right;
+  padding-left: 25px;
+}
+
+.sidebar-right .sidebar::before {
+  content: "";
+  display: block;
+  height: 99999px;
+  position: absolute;
+  left: 0;
+  top: -300px;
+  z-index: -10;
+}
+
+.sidebar-right .sidebar::before {
+  border-left: 1px solid #eee;
+}
+
+@media only screen and (max-width: 992px) {
+  .sidebar-right .main-content {
+    float: none;
+    padding-right: 15px;
+  }
+  .sidebar-right .sidebar {
+    float: none;
+    padding-top: 25px;
+    margin-bottom: 25px;
+    padding-left: 15px;
+  }
+  .sidebar-right .sidebar::before {
+    border: 0;
+  }
+}
+
+
+/* sidebar-right END */
+
+
+/* sidebar-both */
+
+
+/* Left sidebar */
+
+
+/* Right sidebar */
+
+
+/* sidebar-both END */

@@ -1,0 +1,62 @@
+﻿@using Models
+@using SeoBiz.Cms.Posts
+@inject IPostService PostService;
+@{
+    Layout = "_Layout";
+}
+
+@RenderSection("PageTitle", false)
+
+<section id="page-content" class="sidebar-right pt-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-9 main-content">
+                <div class="blog-classic2-list-main ">
+                    <!--Blog Classic2 Item -->
+                    @RenderBody()
+                    <!--Blog Classic2 Item End-->
+                </div>
+                @*<div class="blog-page text-left">
+                        <span class="page-info">Page 1 of 2</span>
+                        <a href="#">First</a>
+                        <a href="#"><span class="fa fa-angle-left"></span></a>
+                        <a href="#">1</a> <a href="#" class="current">2</a>
+                        <a href="#">...</a>
+                        <a href="#"><span class="fa fa-angle-right"></span></a>
+                        <a href="#" class="disable" disable="">Last</a>
+                    </div>*@
+                <div class="pb-60"></div>
+            </div>
+            <div class="col-sm-12 col-md-3 sidebar">
+                <div class="blog-sidebar-content">
+                    <div class="widget-posts-box">
+                        <h2 class="widget-title">Свежие статьи</h2>
+                        <ul class="widget-posts">
+                            @{
+                                var posts = await PostService.GetPage(new PostListFilter
+                                {
+                                    Limit = 3,
+                                    Published = true,
+                                    WithoutBody = true,
+                                    CategoryIds = new[] {(string)ViewData["CategoryId"]}
+                                });
+
+
+
+                                var recent = posts.Items.Select(x => new RecentArticlePreview(x)).ToArray();
+                            }
+                            @foreach (var article in recent)
+                            {
+                                Html.RenderPartial("Category/_RecentArticlePreview", article);
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    @RenderSection("Scripts", required: false)
+}

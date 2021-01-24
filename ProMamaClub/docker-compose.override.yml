@@ -6,4 +6,5 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
-    mem_limit: '500m'
+    mem_limit: 500m
+    network_mode: "bridge"

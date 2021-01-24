@@ -1,0 +1,157 @@
+/*default style*/
+
+[class*="dg-btn-"] {
+  color: #555;
+  border-color: #555;
+  background-color: #555;
+  margin: 3px;
+  white-space: nowrap;
+  border: none;
+  background-image: none;
+  letter-spacing: 0.04em;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
+
+  [class*="dg-btn-"]:before {
+    background-color: #555;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+  }
+
+  [class*="dg-btn-"],
+  [class*="dg-btn-"]:link,
+  [class*="dg-btn-"]:before,
+  [class*="dg-btn-"]:link:before {
+    transition: all ease-in 300ms;
+    -moz-transition: all ease-in 300ms;
+    /* Firefox 4 */
+    -webkit-transition: all ease-in 300ms;
+    /* Safari and Chrome */
+    -o-transition: all ease-in 300ms;
+    /* Opera */
+    -ms-transition: all ease-in 300ms;
+    /* IE9? */
+  }
+
+.theme-main [class*="dg-btn-"]:hover {
+  color: #222533;
+  border-color: #222533;
+  background: #222533;
+}
+
+  .theme-main [class*="dg-btn-"]:hover:before {
+    background: #222533;
+  }
+
+
+/*btn color*/
+
+
+/*btn color*/
+
+
+/*btn Hover color*/
+
+
+/*btn hover color end*/
+
+.dg-btn-1,
+.dg-btn-1:link,
+.dg-btn-1:active,
+.dg-btn-1:visited {
+  color: #FFF;
+  display: inline-block;
+  border: 1px solid transparent;
+  background-size: 105% !important;
+  background-position: center !important;
+}
+
+.theme-main .dg-btn-1:hover {
+  color: #FFF;
+  text-decoration: none;
+  background-position: right bottom;
+}
+
+[class*="dg-btn-"] {
+  padding: 11px 20px 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+}
+
+  [class*="dg-btn-"].size-lg {
+    padding: 13px 26px;
+    font-size: 14px;
+    line-height: 1.3333333;
+  }
+
+  [class*="dg-btn-"].radius-3px {
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+  }
+
+
+/* */
+
+
+/*Icon Animation*/
+
+/*@-webkit-keyframes icon-bounce {
+    0,
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    50% {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+}
+
+@keyframes icon-bounce {
+    0,
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    50% {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+}
+
+@-webkit-keyframes icon-bounce-left {
+    0,
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    50% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+}
+
+@keyframes icon-bounce-left {
+    0,
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+    50% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+}*/
+
+
+/*table*/
+
+.dg-btn-1.btn-accent {
+  color: #FFF;
+}

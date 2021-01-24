@@ -6,4 +6,5 @@ services:
     build:
       context: .
       dockerfile: ProMamaClub/Dockerfile
-    mem_limit: '500m'
+    mem_limit: 500m
+    network_mode: "bridge"

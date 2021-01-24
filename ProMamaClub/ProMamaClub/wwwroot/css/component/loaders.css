@@ -1,0 +1,212 @@
+/**
+ *
+ * All animations must live in their own file
+ * in the animations directory and be included
+ * here.
+ *
+ */
+
+
+/**
+ * Styles shared by multiple animations
+ */
+
+@-webkit-keyframes scale {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  45% {
+    -webkit-transform: scale(0.1);
+    transform: scale(0.1);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes scale {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  45% {
+    -webkit-transform: scale(0.1);
+    transform: scale(0.1);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes scale {
+  30% {
+    -webkit-transform: scale(0.3);
+    transform: scale(0.3);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.ball-clip-rotate-pulse {
+  position: relative;
+  -webkit-transform: translateY(-15px);
+  -ms-transform: translateY(-15px);
+  transform: translateY(-15px);
+}
+
+  .ball-clip-rotate-pulse > div {
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 100%;
+  }
+
+    .ball-clip-rotate-pulse > div:first-child {
+      background: #bababa;
+      height: 16px;
+      width: 16px;
+      top: 9px;
+      left: 9px;
+      -webkit-animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+      animation: scale 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+    }
+
+    .ball-clip-rotate-pulse > div:last-child {
+      position: absolute;
+      border: 2px solid #bababa;
+      width: 30px;
+      height: 30px;
+      background: transparent;
+      border: 2px solid;
+      border-color: #bababa transparent #bababa transparent;
+      -webkit-animation: rotate 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+      animation: rotate 1s 0s cubic-bezier(.09, .57, .49, .9) infinite;
+      -webkit-animation-duration: 1s;
+      animation-duration: 1s;
+    }
+
+@keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+  }
+
+  50% {
+    -webkit-transform: rotate(180deg) scale(0.6);
+    transform: rotate(180deg) scale(0.6);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg) scale(1);
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+
+/**
+ * Lines
+ */
+
+
+/**
+ * Misc
+ */
+
+.page-loaders {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1100;
+  background-color: #fff;
+  text-align: center;
+}
+
+.loaders {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.page-loaders:after {
+  content: "";
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  width: 0px;
+  overflow: hidden;
+}
+
+.loader-inner {
+  display: inline-block;
+}
+
+  .loader-inner,
+  .loader-inner *,
+  .page-loaders *:after,
+  .page-loaders *:after {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+
+.loader-accent.ball-clip-rotate-pulse > div:first-child {
+  background-color: #20a3f0;
+}
+
+.loader-accent.ball-clip-rotate-pulse > div:last-child {
+  border-top-color: #20a3f0;
+  border-bottom-color: #20a3f0;
+}

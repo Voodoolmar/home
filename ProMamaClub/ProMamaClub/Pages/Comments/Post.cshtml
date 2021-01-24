@@ -1,0 +1,27 @@
+﻿@page
+@model Comments.PostModel
+
+<h4 class="detail-heading">Оставить коментарий</h4>
+<form method="post" class="detail-message" id="comment-form">
+    @Html.HiddenFor(x=>x.Comment.PostId)
+    <ul class="message-formlist">
+        <li style="width: 50%;">
+            <div class="form-row">
+                <input type="text" name="@Html.NameFor(x => x.Comment.Name)" placeholder="Имя *" required="required"/>
+            </div>
+        </li>
+        <li style="width: 50%;">
+            <div class="form-row">
+                <input type="email" name="@Html.NameFor(x => x.Comment.Email)" placeholder="Email *" required="required"/>
+            </div>
+        </li>
+        <li style="width: 100%;">
+            <div class="form-row">
+                <textarea placeholder="Коментарий *" name="@Html.NameFor(x => x.Comment.Text)" rows="4" required="required"></textarea>
+            </div>
+        </li>
+    </ul>
+    <div class="message-submit">
+        <input type="submit" value="Оставить коментарий" class="dg-btn-1 radius-3px btn-accent size-lg"/>
+    </div>
+</form>

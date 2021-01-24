@@ -1,0 +1,108 @@
+﻿@page "{id?}"
+@using SeoBiz.Cms.Categories
+@model Admin.CategoryModel
+@{
+    ViewData["Title"] = "Category";
+    Layout = "_AdminLayout";
+}
+
+
+
+<section class="sidebar-right pt-40 pb-40">
+    <div class="container">
+        <h2>Категории</h2>
+        <div class="row">
+            <div class="col-sm-6 main-content">
+                <ul>
+                    <li>
+                        <a asp-page="/Admin/Category" asp-route-id="@null">
+                            @{
+                                var isNew = string.IsNullOrEmpty(Model.Category.Id) ? "badge bg-accent" : "";
+                            }
+                            <span class="@isNew">
+                                Новая
+                            </span>
+                        </a>
+                    </li>
+                    @for (var i = 0; i < Model.Categories.Length; i++)
+                    {
+                        var category = Model.Categories[i];
+                        <li>
+                            @{
+                                var current = category.Category.Id == Model.Category.Id ? "badge bg-accent" : "";
+                            }
+                            <a asp-page="/Admin/Category" asp-route-id="@category.Category.Id">
+                                <span class="@current">
+                                    @category.Category.Title
+                                </span>
+                            </a>
+
+                            <span class="btn-group pull-right">
+                                @if (i != 0)
+                                {
+                                    <a asp-page="/Admin/Category" asp-route-id="@category.Category.Id" asp-page-handler="Up"><i class="fa fa-arrow-up"></i></a>
+                                }
+                                @if (i < Model.Categories.Length - 1)
+                                {
+                                    <a asp-page="/Admin/Category" asp-route-id="@category.Category.Id" asp-page-handler="Down"><i class="fa fa-arrow-down"></i></a>
+                                }
+                            </span>
+                        </li>
+                        var length = (category.Subcategories ?? new CategoryViewItem[0]).Length;
+                        for (var j = 0; j < length; j++)
+                        {
+                            var subcategory = (category.Subcategories ?? new CategoryViewItem[0])[j];
+                            <li class="pl-20">
+                                <a asp-page="/Admin/Category" asp-route-id="@subcategory.Category.Id">
+                                    <span class="@(subcategory.Category.Id == Model.Category.Id ? "badge bg-accent" : "")">
+                                        @subcategory.Category.Title
+                                    </span>
+                                </a>
+
+                                <span class="btn-group pull-right">
+                                    @if (j != 0)
+                                    {
+                                        <a asp-page="/Admin/Category" asp-route-id="@subcategory.Category.Id" asp-page-handler="Up"><i class="fa fa-arrow-up"></i></a>
+                                    }
+                                    @if (j < length - 1)
+                                    {
+                                        <a asp-page="/Admin/Category" asp-route-id="@subcategory.Category.Id" asp-page-handler="Down"><i class="fa fa-arrow-down"></i></a>
+                                    }
+                                </span>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="col-sm-6 main-content">
+                <div asp-validation-summary="All"></div>
+                <form method="post">
+                    @Html.HiddenFor(x => x.Category.Id)
+
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Category.ParentId, "Категория")
+                        @Html.DropDownListFor(x => x.Category.ParentId, Model.RootCategories, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Category.Title, "Название")
+                        @Html.TextBoxFor(x => x.Category.Title, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Category.Tags, "Ключевые слова")
+                        @Html.TextBoxFor(x => x.Category.Tags, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Category.Description, "Краткое описние")
+                        @Html.TextAreaFor(x => x.Category.Description, new { rows = "3", @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Category.Image, "Url картинки")
+                        @Html.TextBoxFor(x => x.Category.Image, new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

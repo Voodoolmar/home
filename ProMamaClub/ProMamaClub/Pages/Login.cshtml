@@ -1,0 +1,29 @@
+﻿@page
+@model ProMamaClub.Pages.LoginModel
+@{
+    ViewData["Title"] = "Вход";
+    Layout = "_Layout";
+    ViewData["Description"] = "Вход в систему";
+}
+
+<div class="container pb-80 pt-80">
+
+    <h2 class="dg-title36">@ViewData["Title"]</h2>
+    <p class="text-center width-55 mb-30 animation delay1 fadeInUp animated">Для аутентификации введите свое имя в телеграме.</p>
+    <div class="width-55">
+        <form method="POST">
+            <div class="row dg-form-content14">
+                <div class="col-sm-12">
+                    <div class="form-row">
+                        <input asp-for="Login" required="">
+                        <label>Имя в телеграме</label>
+                        <span class="line"asp-validation-for="Login"></span> </div>
+                </div>
+                <div class="col-sm-12 mt-30 pb-30">
+                    <input type="submit" name="submit" title="Запрос авторизации" value="Запрос авторизации" class=" dg-btn-1 radius-3px btn-accent hover-info size-lg">
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
